@@ -23,7 +23,7 @@ case $action in
   (create)
     #check if the container `jrvs-psql` is created or not
     if [ "$CONTAINER_EXISTS" -eq 2 ]; then
-      echo >&2 error: container is already running
+      echo >&2 error: container already exists
       echo "$USAGE"
       exit 1
     elif [ "$#" -lt 3 ]; then
@@ -52,7 +52,6 @@ case $action in
       exit $?
     else
       #start stop the container
-      docker container start jrvs-psql
       docker container stop jrvs-psql
       exit $?
     fi;;
