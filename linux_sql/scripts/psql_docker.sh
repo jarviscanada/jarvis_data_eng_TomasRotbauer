@@ -51,7 +51,7 @@ case $action in
       docker container start jrvs-psql
       exit $?
     else
-      #start stop the container
+      #stop the container
       docker container stop jrvs-psql
       exit $?
     fi;;
