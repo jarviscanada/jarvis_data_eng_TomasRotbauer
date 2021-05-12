@@ -14,4 +14,6 @@ SELECT usage.host_id,
 FROM public.host_info info JOIN public.host_usage usage
     ON info.id = usage.host_id
 GROUP BY usage.host_id, host_name, time_stamp
-ORDER BY host_id;
+ORDER BY host_id, time_stamp;
+
+--Detect host failure
