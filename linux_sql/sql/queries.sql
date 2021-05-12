@@ -8,9 +8,10 @@ SELECT usage.host_id,
        info.hostname as host_name,
        (date_trunc('hour', usage.timestamp) +
             date_part('minute', usage.timestamp)::int / 5 *
-            interval '5 min') as timestamp,
-       AVG (info.total_mem - usage.memory_free) / info.total_mem * 100
+            interval '5 min') as time_stamp,
+       AVG ((info.total_mem - usage.memory_free)::real / info.total_mem * 100)
            as avg_used_mem_percentage
 FROM public.host_info info JOIN public.host_usage usage
     ON info.id = usage.host_id
-GROUP BY usage.host_id, host_name, timestamp;
+GROUP BY usage.host_id, host_name, time_stamp
+ORDER BY host_id;
