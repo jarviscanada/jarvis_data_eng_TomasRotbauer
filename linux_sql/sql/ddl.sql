@@ -1,10 +1,7 @@
 --Connect to host_agent database
 \c host_agent;
 
-DROP TABLE IF EXISTS public.host_usage;
-DROP TABLE IF EXISTS public.host_info;
-
-CREATE TABLE public.host_info (
+CREATE TABLE IF NOT EXISTS public.host_info (
     id               SERIAL PRIMARY KEY,
     hostname         VARCHAR UNIQUE NOT NULL,
     cpu_number       SMALLINT NOT NULL,
@@ -16,7 +13,7 @@ CREATE TABLE public.host_info (
     "timestamp"      TIMESTAMP NOT NULL
 );
 
-CREATE TABLE public.host_usage (
+CREATE TABLE IF NOT EXITS public.host_usage (
     "timestamp"    TIMESTAMP NOT NULL,
     host_id        SERIAL NOT NULL,
     memory_free    INTEGER NOT NULL,
