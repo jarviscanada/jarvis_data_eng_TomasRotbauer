@@ -1,8 +1,8 @@
 --Connect to host_agent database
 \c host_agent;
 
-DROP TABLE IF EXISTS public.host_info;
 DROP TABLE IF EXISTS public.host_usage;
+DROP TABLE IF EXISTS public.host_info;
 
 CREATE TABLE public.host_info (
     id               SERIAL PRIMARY KEY,
