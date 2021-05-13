@@ -29,7 +29,7 @@ timestamp=$(date --utc "+%Y-%m-%d %T")
 
 insert_stmt="INSERT INTO host_info (hostname, cpu_number, cpu_architecture, cpu_model, \
     cpu_mhz, l2_cache, total_mem, timestamp) VALUES ('$hostname', $cpu_number, '$cpu_architecture', \
-    '$cpu_model', $cpu_mhz, $l2_cache, $total_mem, $timestamp);"
+    '$cpu_model', $cpu_mhz, '$l2_cache', $total_mem, '$timestamp');"
 
 PGPASSWORD="${psql_password}" psql -h "${psql_host}" -p "${port}" -d "${db_name}" -U "${psql_user}" -c "${insert_stmt}"
 
