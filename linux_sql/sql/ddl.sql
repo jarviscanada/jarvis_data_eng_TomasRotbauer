@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS public.host_info (
     "timestamp"      TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXITS public.host_usage (
+CREATE TABLE IF NOT EXISTS public.host_usage (
     "timestamp"    TIMESTAMP NOT NULL,
     host_id        SERIAL NOT NULL,
     memory_free    INTEGER NOT NULL,
