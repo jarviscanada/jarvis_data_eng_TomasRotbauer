@@ -25,11 +25,11 @@ top_out=$(top -n 1)
 timestamp=$(date --utc "+%Y-%m-%d %T")
 host_id=$(PGPASSWORD="${psql_password}" psql -t -h "${psql_host}" -p "${port}" -d "${db_name}" \
     -U "${psql_user}" -c "${id_query}")
-memory_free=$(cat /proc/meminfo | egrep "^MemFree:" | awk '{print $2}' | xargs)
-cpu_idle=$(echo "$top_out" | egrep "^%Cpu\(s\):" | awk '{print $8}' | xargs)
-cpu_kernel=$(echo "$top_out" | egrep "^%Cpu\(s\):" | awk '{print $4}' | xargs)
-disk_io=$(vmstat -d | egrep "^sda" | awk '{print $10}' | xargs)
-disk_available=$(df -BM / | egrep "^/dev/sda2" | awk '{print $4}' | xargs)
+memory_free=$(cat /proc/meminfo | grep -E "^MemFree:" | awk '{print $2}' | xargs)
+cpu_idle=$(echo "$top_out" | grep -E "^%Cpu\(s\):" | awk '{print $8}' | xargs)
+cpu_kernel=$(echo "$top_out" | grep -E "^%Cpu\(s\):" | awk '{print $4}' | xargs)
+disk_io=$(vmstat -d | grep -E "^sda" | awk '{print $10}' | xargs)
+disk_available=$(df -BM / | grep -E "^/dev/sda2" | awk '{print $4}' | xargs)
 
 if [ -z "$host_id" ]; then
   echo >&2 "Host was not found in host_info table. No insertions to host_usage were made."
