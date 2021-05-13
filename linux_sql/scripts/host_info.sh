@@ -2,6 +2,11 @@
 
 USAGE='./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password'
 
+get_hardware_info() {
+    local info=$(echo "$lscpu_out"  | grep -E "$1" | awk "{print \$$2}" | xargs)
+    echo "${info}"
+}
+
 #validate arguments
 if [ "$#" -ne 5 ]; then
     echo >&2 "Illegal number of parameters"
@@ -19,11 +24,13 @@ psql_password=$5
 #save and parse hardware specification
 lscpu_out=$(lscpu)
 hostname=$(hostname -f)
-cpu_number=$(echo "$lscpu_out"  | grep -E "^CPU\(s\):" | awk '{print $2}' | xargs)
-cpu_architecture=$(echo "$lscpu_out"  | grep -E "^Architecture:" | awk '{print $2}' | xargs)
-cpu_model=$(echo "$lscpu_out"  | grep -E "^Model:" | awk '{print $2}' | xargs)
-cpu_mhz=$(echo "$lscpu_out"  | grep -E "^CPU MHz:" | awk '{print $3}' | xargs)
-l2_cache=$(echo "$lscpu_out"  | grep -E "^L2 cache:" | awk '{print $3}' | xargs)
+cpu_number="$(get_hardware_info "^CPU\(s\):" 2)"
+cpu_architecture="$(get_hardware_info "^Architecture:" 2)"
+cpu_model="$(get_hardware_info "^Model:" 2)"
+cpu_mhz="$(get_hardware_info "^CPU MHz:" 3)"
+l2_cache="$(get_hardware_info "^L2 cache:" 3)"
+
+#Get memory and timestamp
 total_mem=$(cat /proc/meminfo | grep -E "MemTotal:" | awk '{print $2}' | xargs)
 timestamp=$(date --utc "+%Y-%m-%d %T")
 
