@@ -24,7 +24,7 @@ psql_password=$5
 #save and parse usage data
 #query to obtain host id
 id_query="SELECT id FROM host_info WHERE hostname = '$(hostname -f)';"
-top_out=$(top -n 1)
+top_out="$(TERM=xterm top -n 1 -b)"
 
 #usage data
 timestamp=$(date --utc "+%Y-%m-%d %T")
