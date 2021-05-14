@@ -7,13 +7,14 @@ applications of this project are numerous, and it may particularly prove
 useful to network administrators who may wish to understand how well a 
 particular distributed system suits their specific processing and memory 
 demands. The design works primarily with Linux bash scripts, which collect
-all the necessary hardware usage data. These scripts are activated 
+all the necessary hardware usage data. These scripts are executed 
 periodically by Linux's `crontab` command, and the data gets stored into 
 a database managed with PostgreSQL. Another very important technology 
 that was used is Docker, which allows the containerization of PostgreSQL.
 This means that the database management system can run without actual 
 installation on a host, making the design portable to any Linux machine.
-This is especially useful for clusters. The project itself was developed
+This is especially useful for clusters, where more than one database may be 
+desired. The project itself was developed
 with Git version control, and stored in this GitHub repository. The 
 Gitflow branching model was applied to facilitate continuous software 
 development practices.
@@ -22,7 +23,7 @@ development practices.
 Starting a PSQL instance using _psql_docker.sh_:<br />
 `bash scripts/psql_docker.sh [start | stop | create] [db_username] [db_pasword]`
 
-Creating the data tables in PSQL with _ddl.sql_:<br />
+Creating the database tables in PSQL with _ddl.sql_:<br />
 `psql -h psql_host -U psql_user -d db_name -f sql/ddl.sql`
 
 Insert host hardware information into the "host_info" database table with _host_info.sh_:<br />
@@ -48,21 +49,17 @@ focused on a per-unit implementation.
 
 ## Scripts
 ### Creating, starting & stopping a PSQL Docker container
-1. To create a new container and volume for
-a PSQL instance:<br />
-   `bash scripts/psql_docker.sh create 
-   db_username db_pasword` <br />
-<br />
+1. To create a new container and volume for a PSQL instance:<br />
+   `bash scripts/psql_docker.sh create db_username db_pasword` <br /> <br />
 2. To start an existing instance:<br />
-`bash scripts/psql_docker.sh start`<br />
-<br />
+   `bash scripts/psql_docker.sh start` <br /> <br />
 3. To stop a running instance:<br />
-   `bash scripts/psql_docker.sh stop`<br />
+   `bash scripts/psql_docker.sh stop`
    
 ### Adding a new host:
 This command will execute the bash script responsible for adding
 a new host to the "host_info" database table. This is required in order to
-collect usage data for the host. See section "Schema" below for 
+collect usage data for the host. See "Database Modelling" below for 
 details about what specific hardware info is collected.<br />
 `scripts/host_info.sh psql_host psql_port db_name psql_user psql_password`
 ### Collecting usage data:
@@ -70,7 +67,7 @@ Upon execution of the _host_usage.sh_ script using the command below,
 the host's current usage data is retrieved with `top` and saved to
 the "host_usage" database table. When the host is not present in the 
 "host_info" table, it is first added automatically via execution of the
-_host_info.sh_ script above. See section "Schema" below for
+_host_info.sh_ script above. See "Database Modelling" below for
 details about what specific hardware usage data is collected.<br />
 `bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password`
 ### Crontab setup:
@@ -84,8 +81,7 @@ crontab -e
 * * * * * bash /path/to/linux_sql/scripts/host_usage.sh psql_host port db_name psql_user psql_password &> /tmp/host_usage.log
 ```
 ### Useful queries (_sql/queries.sql_):
-The file _queries.sql_ contains three useful queries that answer
-very relevant business questions:
+The file _queries.sql_ contains three useful queries that answer relevant business questions:
 1. The first query in the file lists all the currently monitored
 hosts, including the number of logical cores and total memory.
    Additionally, the hosts are ordered by these amounts in descending
@@ -135,26 +131,26 @@ validation purposes as well as debugging:
 ## Bash scripts
 * The `bash -x` option was used for debugging. It prints out the 
 details about where program control does what.
-* "psql_docker.sh" functionality was verified/tested
+* _psql_docker.sh_ functionality was verified/tested
   using Docker CLI. E.g., after running the create command, check
   if volume was created using `docker volume ls` command.
-* "host_info.sh" & "host_usage.sh" were tested on the local
+* _host_info.sh_ & _host_usage.sh_ were tested on the local
 host, and manually verified by checking the database contents
-  and making sure the entries match the actual specifications.
+  after execution to make sure the entries match the actual specifications.
 ## SQL queries
 Mock data was generated consisting of several entries. The output of each
 query was tested against the expected result. For example, in order
 to test the query that computes the average memory consumption, three
 insertions were made with a synthetic timestamp mapping to one 
-five-minute interval. The average used memory was averaged manually,
+five-minute interval. The average used memory was calculated manually,
 and made sure to match the output. The other two queries were
-even simpler to manually verify.
-#Improvements
+even simpler to manually verify, hence similar approaches were taken.
+# Improvements
 The following is a list of features that could be improved or added:
 1. Add support for other operating systems. Currently, the bash
-scripts and psql image only work with Linux.
+scripts and PSQL Docker image only work with Linux.
 2. Integrate a backup storage system to account for potential data
 loss. Currently, the database exists only on one of the machines.
 3. Add an automatic alert mechanism for the event when host failure
 occurs, as explained in the queries section. This would ensure that
-   such events don't happen without anyone noticing.
+   such events do not happen without anyone noticing.
