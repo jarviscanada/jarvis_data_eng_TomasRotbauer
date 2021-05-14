@@ -130,4 +130,31 @@ it reports the host id, timestamp, and number of usage entries for
 | disk_io         | Number of disk I/O devices   | smallint
 | disk_available  | Available disk space   | varchar
 # Test
-
+Here are some of the testing methods that were used for functionality
+validation purposes as well as debugging:
+## Bash scripts
+* The `bash -x` option was used for debugging. It prints out the 
+details about where program control does what.
+* "psql_docker.sh" functionality was verified/tested
+  using Docker CLI. E.g., after running the create command, check
+  if volume was created using `docker volume ls` command.
+* "host_info.sh" & "host_usage.sh" were tested on the local
+host, and manually verified by checking the database contents
+  and making sure the entries match the actual specifications.
+## SQL queries
+Mock data was generated consisting of several entries. The output of each
+query was tested against the expected result. For example, in order
+to test the query that computes the average memory consumption, three
+insertions were made with a synthetic timestamp mapping to one 
+five-minute interval. The average used memory was averaged manually,
+and made sure to match the output. The other two queries were
+even simpler to manually verify.
+#Improvements
+The following is a list of features that could be improved or added:
+1. Add support for other operating systems. Currently, the bash
+scripts and psql image only work with Linux.
+2. Integrate a backup storage system to account for potential data
+loss. Currently, the database exists only on one of the machines.
+3. Add an automatic alert mechanism for the event when host failure
+occurs, as explained in the queries section. This would ensure that
+   such events don't happen without anyone noticing.
