@@ -1,5 +1,5 @@
 # Linux Cluster Monitoring Agent
-## Introduction
+# Introduction
 In this project, I developed a minimum viable product (MVP) for 
 demonstrating how hardware usage data could automatically be collected 
 from Linux machines within a cluster and stored into a database. The 
@@ -18,7 +18,7 @@ with Git version control, and stored in this GitHub repository. The
 Gitflow branching model was applied to facilitate continuous software 
 development practices.
 
-## Quick Start
+# Quick Start
 Starting a PSQL instance using _psql_docker.sh_:<br />
 `bash scripts/psql_docker.sh [start | stop | create] [db_username] [db_pasword]`
 
@@ -37,3 +37,15 @@ crontab -e
 # Insert the following line:
 * * * * * bash /path/to/linux_sql/scripts/host_usage.sh psql_host port db_name psql_user psql_password &> /tmp/host_usage.log
 ```
+
+# Implementation 
+This section describes the details pertaining to the implementation and design 
+process of the system developed.
+## Architecture
+The schematic below illustrates the fundamental structure of a Linux cluster
+of 3 machines. Also shown is the relative position of the database as well
+as the monitoring agents. The purpose of this schematic is to demonstrate 
+the feasibility of implementing the MVP on a cluster, since this project
+focused on a per-unit implementation.
+
+![alt text](url "Architecture Schematic")
