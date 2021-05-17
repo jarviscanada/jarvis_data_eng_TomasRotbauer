@@ -1,6 +1,6 @@
 #! /bin/bash
 
-USAGE='bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password'
+USAGE="$0 psql_host psql_port db_name psql_user psql_password"
 
 get_host_id() {
     host_id=$(PGPASSWORD="${psql_password}" psql -t -h "${psql_host}" -p "${port}" -d "${db_name}" \
@@ -46,6 +46,6 @@ insert_stmt="INSERT INTO host_usage (timestamp, host_id, memory_free, cpu_idle, 
     disk_available) VALUES ('${timestamp}', ${host_id}, ${memory_free}, ${cpu_idle}, ${cpu_kernel}, \
     ${disk_io}, '${disk_available}');"
 
-PGPASSWORD="${psql_password}" psql -h "${psql_host}" -p "${port}" -d "${db_name}" -U "${psql_user}" -c "${insert_stmt}"
+psql -h "${psql_host}" -p "${port}" -d "${db_name}" -U "${psql_user}" -c "${insert_stmt}"
 
-exit 0
+exit $?
