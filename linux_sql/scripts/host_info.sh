@@ -1,16 +1,17 @@
 #! /bin/bash
 
-USAGE='./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password'
+USAGE="$0 psql_host psql_port db_name psql_user psql_password"
 
 get_hardware_info() {
-    local info=$(echo "$lscpu_out"  | grep -E "$1" | awk "{print \$$2}" | xargs)
+    local info
+    info=$(echo "$lscpu_out"  | grep -E "$1" | awk "{print \$$2}" | xargs)
     echo "${info}"
 }
 
 #validate arguments
 if [ "$#" -ne 5 ]; then
     echo >&2 "Illegal number of parameters"
-    echo "${USAGE}"
+    echo "Usage: ${USAGE}"
     exit 1
 fi
 
@@ -38,7 +39,7 @@ insert_stmt="INSERT INTO host_info (hostname, cpu_number, cpu_architecture, cpu_
     cpu_mhz, l2_cache, total_mem, timestamp) VALUES ('${hostname}', ${cpu_number}, '${cpu_architecture}', \
     '${cpu_model}', ${cpu_mhz}, '${l2_cache}', ${total_mem}, '${timestamp}');"
 
-PGPASSWORD="${psql_password}" psql -h "${psql_host}" -p "${port}" -d "${db_name}" -U "${psql_user}" \
+psql -h "${psql_host}" -p "${port}" -d "${db_name}" -U "${psql_user}" \
     -c "${insert_stmt}"
 
-exit 0
+exit $?
