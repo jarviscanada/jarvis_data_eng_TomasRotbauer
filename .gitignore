@@ -1,3 +1,4 @@
 .idea
 intellij-java-google-style.xml
-target/
+**/target/**
+**/core_java/grep/src/main/java/ca/jrvs/apps/practice/**
