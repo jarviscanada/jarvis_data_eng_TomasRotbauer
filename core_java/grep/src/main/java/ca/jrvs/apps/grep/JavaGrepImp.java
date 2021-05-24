@@ -3,6 +3,7 @@ package ca.jrvs.apps.grep;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,16 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void process() throws IOException {
+    Vector<String> matchedLines = new Vector<String>();
 
+    listFiles(rootPath).stream().forEach(f -> {
+      readLines(f).stream().forEach(l -> {
+        if (containsPattern(l))
+            matchedLines.add(l);
+      });
+    });
+
+    writeToFile(matchedLines);
   }
 
   /**
