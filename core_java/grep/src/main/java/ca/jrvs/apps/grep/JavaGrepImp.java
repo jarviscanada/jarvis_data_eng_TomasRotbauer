@@ -2,8 +2,9 @@ package ca.jrvs.apps.grep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +32,7 @@ class JavaGrepImp implements JavaGrep {
 
     try {
       javaGrepImp.process();
-    }
-    catch (Exception ex) {
+    } catch (Exception ex) {
       javaGrepImp.logger.error(ex.getMessage(), ex);
     }
   }
@@ -44,12 +44,13 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void process() throws IOException {
-    Vector<String> matchedLines = new Vector<String>();
+    List<String> matchedLines = new ArrayList<>();
 
-    listFiles(rootPath).stream().forEach(f -> {
-      readLines(f).stream().forEach(l -> {
-        if (containsPattern(l))
-            matchedLines.add(l);
+    listFiles(rootPath).forEach(f -> {
+      readLines(f).forEach(l -> {
+        if (containsPattern(l)) {
+          matchedLines.add(l);
+        }
       });
     });
 
@@ -64,7 +65,21 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public List<File> listFiles(String rootDir) {
-    return null;
+    List<File> files = new ArrayList<>();
+    File dir = new File(rootDir);
+
+    if (!dir.exists())
+      return files;
+
+    Arrays.stream(dir.listFiles()).forEach(f -> {
+      if (f.isDirectory()) {
+        files.addAll(listFiles(f.getAbsolutePath()));
+      }
+      else files.add(f);
+    });
+
+    logger.info("Returning directory files: " + files.toString());
+    return files;
   }
 
   /**
@@ -78,7 +93,8 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public List<String> readLines(File inputFile) {
-    return null;
+    List<String> lines = new ArrayList<>();
+    return lines;
   }
 
   /**
