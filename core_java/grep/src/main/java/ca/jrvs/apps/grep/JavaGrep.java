@@ -53,7 +53,7 @@ public interface JavaGrep {
 
   String getRegex();
 
-  void setRegex();
+  void setRegex(String regex);
 
   String getOutFile();
 
