@@ -1,8 +1,7 @@
 package ca.jrvs.practice.lambdaStream;
 
-import static java.lang.Math.sqrt;
-
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -102,7 +101,7 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public DoubleStream squareRootIntStream(IntStream intStream) {
-    return intStream.asDoubleStream().map(d -> sqrt(d));
+    return intStream.asDoubleStream().map(Math::sqrt);
   }
 
   /**
@@ -134,7 +133,7 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public Consumer<String> getLambdaPrinter(String prefix, String suffix) {
-    return null;
+    return body -> System.out.println(prefix + body + suffix);
   }
 
   /**
@@ -150,7 +149,7 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public void printMessages(String[] messages, Consumer<String> printer) {
-
+    Arrays.stream(messages).forEach(printer);
   }
 
   /**
@@ -166,7 +165,7 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public void printOdd(IntStream intStream, Consumer<String> printer) {
-
+    getOdd(intStream).mapToObj(i -> ((Integer) i).toString()).forEach(printer);
   }
 
   /**
@@ -178,6 +177,6 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public Stream<Integer> flatNestedInt(Stream<List<Integer>> ints) {
-    return null;
+    return ints.flatMap(Collection::stream).map(i -> i*i);
   }
 }
