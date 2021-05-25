@@ -1,4 +1,4 @@
-package ca.jrvs.apps.practice;
+package ca.jrvs.practice.javaRegex;
 
 public class RegexExcImp implements RegexExc {
 
