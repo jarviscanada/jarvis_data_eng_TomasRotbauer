@@ -2,6 +2,8 @@ package ca.jrvs.apps.grep;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +80,7 @@ class JavaGrepImp implements JavaGrep {
       else files.add(f);
     });
 
-    logger.info("Returning directory files: " + files.toString());
+    logger.info("Returning directory files: " + files);
     return files;
   }
 
@@ -94,6 +96,14 @@ class JavaGrepImp implements JavaGrep {
   @Override
   public List<String> readLines(File inputFile) {
     List<String> lines = new ArrayList<>();
+    try {
+      lines = Files.readAllLines(inputFile.toPath(), Charset.defaultCharset());
+    } catch (IOException e) {
+      e.printStackTrace();
+      logger.error(e.getMessage());
+    }
+
+    lines.forEach(l -> logger.info(l));
     return lines;
   }
 
