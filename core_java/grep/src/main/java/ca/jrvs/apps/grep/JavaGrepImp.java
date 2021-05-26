@@ -8,7 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,13 +50,13 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void process() throws IOException {
-    List<String> matchedLines = new ArrayList<>();
+    List<String> matchedLines;
 
-    listFiles(getRootPath()).forEach(f -> readLines(f).forEach(l -> {
-      if (containsPattern(l)) {
-        matchedLines.add(f + ":" + l);
-      }
-    }));
+    matchedLines = listFiles(getRootPath()).stream()
+        .map(this::readLines)
+        .flatMap(Collection::stream)
+        .filter(this::containsPattern)
+        .collect(Collectors.toList());
 
     writeToFile(matchedLines);
   }
@@ -102,7 +104,7 @@ class JavaGrepImp implements JavaGrep {
       String line;
       BufferedReader reader = new BufferedReader(new FileReader(inputFile));
       while ((line = reader.readLine()) != null) {
-        lines.add(line);
+        lines.add(inputFile + ":" + line);
       }
       reader.close();
     } catch (IOException ex) {
