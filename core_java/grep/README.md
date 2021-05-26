@@ -1,18 +1,19 @@
 # Introduction
 In this project, I used Java 8 to develop an application similar to the Linux builtin
 `grep` feature. Basically, the program searches recursively through a root directory
-to map out any and all files contained. Next, it reads each of these files line-by-line
-using a BufferedReader, and processes each extracted line with Java 8 streams returning
-lines of files that matched the specified Java regular expression. The whole application
-package comes in a Docker container, and Maven was used to manage the build process.
+to map out any and all files contained within it. Next, it reads each of these files line-by-line
+using a BufferedReader, and processes each extracted line with Java 8 stream features. Finally,
+it returns all the lines of files that matched the specified Java regular expression. 
+The whole application is packaged in a Docker image, and Maven was used to manage the build 
+process.
 
 # Quick Start
 * Compile with Maven:
 `mvn clean package` <br />
-* Run locally: `java -jar path/to/grep-1.0-SNAPSHOT.jar`<br />
+* Run locally: `java -jar path/to/grep-1.0-SNAPSHOT.jar <regex> <rootPath> <outFile>`<br />
 * Run in Docker container: `docker run --rm tomasrotbauer/grep <regex> <rootPath> <outFile>`
 
-#Implemenation
+# Implemenation
 The following pseudocode highlights the application's core algorithm. It corresponds
 to the `process()` function inside JavaGrepImp.java, which is the implementation of the 
 JavaGrep.java interface. The interface acts as the code skeleton of the project.
