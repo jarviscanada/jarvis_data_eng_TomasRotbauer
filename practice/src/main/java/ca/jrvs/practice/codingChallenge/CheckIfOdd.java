@@ -12,5 +12,12 @@ public class CheckIfOdd {
     return number % 2 == 1 ? "Odd" : "Even";
   }
 
-
+  /**
+   * Complexity: O(1)
+   * Justification: Only one operation is performed, and the computation itself only takes
+   * one CPU instruction.
+   */
+  public String bitwiseOddOrEven(int number) {
+    return (1 & number) == 1 ? "Odd" : "Even";
+  }
 }
