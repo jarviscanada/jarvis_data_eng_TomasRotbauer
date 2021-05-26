@@ -9,7 +9,7 @@ public class CheckIfOdd {
    * Justification: Only one arithmetic operation is performed per any input
    */
   public String oddOrEven(int number) {
-    return number % 2 == 1 ? "Odd" : "Even";
+    return number % 2 == 0 ? "Even" : "Odd";
   }
 
   /**
