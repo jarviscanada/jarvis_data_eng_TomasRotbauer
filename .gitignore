@@ -4,3 +4,5 @@ intellij-java-google-style.xml
 **/grep-demo.jar
 **/core_java/grep/out/**
 **/core_java/grep/log/**
+*.iml
+ExerciseFiles
