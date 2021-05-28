@@ -20,25 +20,9 @@ public class JDBCExecutor {
 
     try {
       Connection connection = dcm.getConnection();
-      CustomerDAO customerDAO = new CustomerDAO(connection);
-      Customer customer = new Customer();
-      customer.setFirstName("Patrick");
-      customer.setLastName("Star");
-      customer.setEmail("patrick.star@bikinibottom.com");
-      customer.setPhone("987-654-3210");
-      customer.setAddress("120 Conch Street");
-      customer.setCity("Bikini Bottom");
-      customer.setState("Under The Sea");
-      customer.setZipCode("45678");
-
-      Customer dbCustomer = customerDAO.create(customer);
-      jdbcExecutor.logger.info(dbCustomer.toString());
-      dbCustomer = customerDAO.findById(dbCustomer.getId());
-      jdbcExecutor.logger.info(dbCustomer.toString());
-      dbCustomer.setEmail("pstar@bikinibottom.com");
-      dbCustomer = customerDAO.update(dbCustomer);
-      jdbcExecutor.logger.info(dbCustomer.toString());
-      customerDAO.delete(dbCustomer.getId());
+      OrderDAO orderDAO = new OrderDAO(connection);
+      Order order = orderDAO.findById(1000);
+      jdbcExecutor.logger.info(order.toString());
     } catch (SQLException ex) {
       jdbcExecutor.logger.error(ex.getMessage());
     }

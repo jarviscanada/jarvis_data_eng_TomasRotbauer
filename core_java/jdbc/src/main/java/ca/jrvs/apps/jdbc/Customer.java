@@ -14,6 +14,7 @@ public class Customer implements DataTransferObject {
   private String state;
   private String zipCode;
 
+  @Override
   public long getId() {
     return id;
   }
