@@ -22,16 +22,23 @@ public class JDBCExecutor {
       Connection connection = dcm.getConnection();
       CustomerDAO customerDAO = new CustomerDAO(connection);
       Customer customer = new Customer();
-      customer.setFirstName("Larry");
-      customer.setLastName("Lobster");
-      customer.setEmail("larry.lobster@goolagoon.com");
-      customer.setPhone("123-456-7890");
-      customer.setAddress("Goo Lagoon Gym");
+      customer.setFirstName("Patrick");
+      customer.setLastName("Star");
+      customer.setEmail("patrick.star@bikinibottom.com");
+      customer.setPhone("987-654-3210");
+      customer.setAddress("120 Conch Street");
       customer.setCity("Bikini Bottom");
       customer.setState("Under The Sea");
-      customer.setZipCode("12345");
+      customer.setZipCode("45678");
 
-      customerDAO.create(customer);
+      Customer dbCustomer = customerDAO.create(customer);
+      jdbcExecutor.logger.info(dbCustomer.toString());
+      dbCustomer = customerDAO.findById(dbCustomer.getId());
+      jdbcExecutor.logger.info(dbCustomer.toString());
+      dbCustomer.setEmail("pstar@bikinibottom.com");
+      dbCustomer = customerDAO.update(dbCustomer);
+      jdbcExecutor.logger.info(dbCustomer.toString());
+      customerDAO.delete(dbCustomer.getId());
     } catch (SQLException ex) {
       jdbcExecutor.logger.error(ex.getMessage());
     }
