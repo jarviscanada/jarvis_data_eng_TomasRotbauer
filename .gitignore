@@ -7,3 +7,4 @@ intellij-java-google-style.xml
 *.iml
 **/ExerciseFiles
 **/grep/data
+**/dependency-reduced-pom.xml
