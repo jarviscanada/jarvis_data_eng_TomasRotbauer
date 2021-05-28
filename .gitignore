@@ -6,3 +6,4 @@ intellij-java-google-style.xml
 **/core_java/grep/log
 *.iml
 **/ExerciseFiles
+**/grep/data
