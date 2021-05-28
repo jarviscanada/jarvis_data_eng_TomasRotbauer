@@ -1,8 +1,8 @@
 .idea
 intellij-java-google-style.xml
-**/target/**
+**/target
 **/grep-demo.jar
-**/core_java/grep/out/**
-**/core_java/grep/log/**
+**/core_java/grep/out
+**/core_java/grep/log
 *.iml
-ExerciseFiles
+**/ExerciseFiles
