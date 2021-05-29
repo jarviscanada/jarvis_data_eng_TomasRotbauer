@@ -5,6 +5,5 @@ intellij-java-google-style.xml
 **/core_java/grep/out
 **/core_java/grep/log
 *.iml
-**/ExerciseFiles
 **/grep/data
 **/dependency-reduced-pom.xml
