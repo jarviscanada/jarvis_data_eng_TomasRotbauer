@@ -22,6 +22,11 @@ public class JDBCExecutor {
       Connection connection = dcm.getConnection();
       CustomerDAO customerDAO = new CustomerDAO(connection);
       customerDAO.findAllSorted(20).forEach(c -> jdbcExecutor.logger.info(c.toString()));
+      jdbcExecutor.logger.info("Paged");
+      for (int i = 1; i < 3; i++) {
+        jdbcExecutor.logger.info("Page number: " + i);
+        customerDAO.findAllPaged(10, i).forEach(c -> jdbcExecutor.logger.info(c.toString()));
+      }
     } catch (SQLException ex) {
       jdbcExecutor.logger.error(ex.getMessage());
     }

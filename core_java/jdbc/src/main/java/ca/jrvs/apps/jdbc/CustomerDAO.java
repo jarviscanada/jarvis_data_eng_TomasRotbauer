@@ -24,6 +24,10 @@ public class CustomerDAO extends DataAccessObject<Customer> {
   private static final String GET_ALL_LMT = "SELECT customer_id, first_name, last_name, email, "
       + "phone, address, city, state, zipcode FROM customer ORDER BY last_name, first_name LIMIT ?;";
 
+  private static final String GET_ALL_PAGED = "SELECT customer_id, first_name, last_name, email, "
+      + "phone, address, city, state, zipcode FROM customer ORDER BY last_name, first_name LIMIT ?"
+      + "OFFSET ?;";
+
   public CustomerDAO(Connection connection) {
     super(connection);
   }
@@ -90,15 +94,37 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
   public List<Customer> findAllSorted(int limit) {
     List<Customer> customers = new ArrayList<>();
-    try(PreparedStatement statement = this.connection.prepareStatement(GET_ALL_LMT)) {
+    try (PreparedStatement statement = this.connection.prepareStatement(GET_ALL_LMT)) {
       statement.setInt(1, limit);
       ResultSet rs = statement.executeQuery();
-      while(rs.next()) {
+      while (rs.next()) {
         Customer customer = new Customer();
         setUpCustomer(rs, customer);
         customers.add(customer);
       }
-    } catch(SQLException ex) {
+    } catch (SQLException ex) {
+      logger.error(ex.getMessage());
+      throw new RuntimeException(ex);
+    }
+    return customers;
+  }
+
+  public List<Customer> findAllPaged(int limit, int pageNumber) {
+    int offset = (pageNumber - 1) * limit;
+    List<Customer> customers = new ArrayList<>();
+    try (PreparedStatement statement = this.connection.prepareStatement(GET_ALL_PAGED)) {
+      if (limit < 1) {
+        limit = 10;
+      }
+      statement.setInt(1, limit);
+      statement.setInt(2, offset);
+      ResultSet rs = statement.executeQuery();
+      while (rs.next()) {
+        Customer customer = new Customer();
+        setUpCustomer(rs, customer);
+        customers.add(customer);
+      }
+    } catch (SQLException ex) {
       logger.error(ex.getMessage());
       throw new RuntimeException(ex);
     }
