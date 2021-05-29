@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO extends DataAccessObject<Customer> {
@@ -20,6 +21,9 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
   private static final String DELETE = "DELETE FROM customer WHERE customer_id = ?;";
 
+  private static final String GET_ALL_LMT = "SELECT customer_id, first_name, last_name, email, "
+      + "phone, address, city, state, zipcode FROM customer ORDER BY last_name, first_name LIMIT ?;";
+
   public CustomerDAO(Connection connection) {
     super(connection);
   }
@@ -31,15 +35,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       statement.setLong(1, id);
       ResultSet rs = statement.executeQuery();
       while (rs.next()) {
-        customer.setId(rs.getLong("customer_id"));
-        customer.setFirstName(rs.getString("first_name"));
-        customer.setLastName(rs.getString("last_name"));
-        customer.setEmail(rs.getString("email"));
-        customer.setPhone(rs.getString("phone"));
-        customer.setAddress(rs.getString("address"));
-        customer.setCity(rs.getString("city"));
-        customer.setState(rs.getString("state"));
-        customer.setZipCode(rs.getString("zipcode"));
+        setUpCustomer(rs, customer);
       }
     } catch (SQLException ex) {
       logger.error(ex.getMessage());
@@ -92,6 +88,23 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     }
   }
 
+  public List<Customer> findAllSorted(int limit) {
+    List<Customer> customers = new ArrayList<>();
+    try(PreparedStatement statement = this.connection.prepareStatement(GET_ALL_LMT)) {
+      statement.setInt(1, limit);
+      ResultSet rs = statement.executeQuery();
+      while(rs.next()) {
+        Customer customer = new Customer();
+        setUpCustomer(rs, customer);
+        customers.add(customer);
+      }
+    } catch(SQLException ex) {
+      logger.error(ex.getMessage());
+      throw new RuntimeException(ex);
+    }
+    return customers;
+  }
+
   private void setUpStatement(Customer dto, PreparedStatement statement) throws SQLException {
     statement.setString(1, dto.getFirstName());
     statement.setString(2, dto.getLastName());
@@ -101,5 +114,17 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     statement.setString(6, dto.getCity());
     statement.setString(7, dto.getState());
     statement.setString(8, dto.getZipCode());
+  }
+
+  private void setUpCustomer(ResultSet rs, Customer customer) throws SQLException {
+    customer.setId(rs.getLong("customer_id"));
+    customer.setFirstName(rs.getString("first_name"));
+    customer.setLastName(rs.getString("last_name"));
+    customer.setEmail(rs.getString("email"));
+    customer.setPhone(rs.getString("phone"));
+    customer.setAddress(rs.getString("address"));
+    customer.setCity(rs.getString("city"));
+    customer.setState(rs.getString("state"));
+    customer.setZipCode(rs.getString("zipcode"));
   }
 }
