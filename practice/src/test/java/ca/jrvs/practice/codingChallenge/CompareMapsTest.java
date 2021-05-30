@@ -27,7 +27,7 @@ public class CompareMapsTest {
   }
 
   @After
-  public void cleanUp() {
+  public void tearDown() {
     m1.clear();
     m2.clear();
   }
@@ -36,7 +36,7 @@ public class CompareMapsTest {
   public void testEqual() {
     setUp();
     Assert.assertTrue(compareMaps.compareMaps(m1, m2));
-    cleanUp();
+    tearDown();
     }
 
   @Test
@@ -44,7 +44,7 @@ public class CompareMapsTest {
     setUp();
     m1.put(-1,-1);
     Assert.assertFalse(compareMaps.compareMaps(m1, m2));
-    cleanUp();
+    tearDown();
   }
 
 }
