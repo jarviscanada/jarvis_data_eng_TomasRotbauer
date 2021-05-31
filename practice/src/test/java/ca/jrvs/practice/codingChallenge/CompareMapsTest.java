@@ -37,12 +37,12 @@ public class CompareMapsTest {
     setUp();
     Assert.assertTrue(compareMaps.compareMaps(m1, m2));
     tearDown();
-    }
+  }
 
   @Test
   public void testNotEqual() {
     setUp();
-    m1.put(-1,-1);
+    m1.put(-1, -1);
     Assert.assertFalse(compareMaps.compareMaps(m1, m2));
     tearDown();
   }

@@ -177,6 +177,6 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
    */
   @Override
   public Stream<Integer> flatNestedInt(Stream<List<Integer>> ints) {
-    return ints.flatMap(Collection::stream).map(i -> i*i);
+    return ints.flatMap(Collection::stream).map(i -> i * i);
   }
 }

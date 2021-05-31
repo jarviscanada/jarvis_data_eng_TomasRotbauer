@@ -8,10 +8,10 @@ import java.util.Map;
 public class CompareMaps {
 
   /**
-   * Complexity: O(n), n ~ the number of pairs in both maps
-   * Justification: Need to ensure one maps' items are in the other and vice versa
+   * Complexity: O(n), n ~ the number of pairs in both maps Justification: Need to ensure one maps'
+   * items are in the other and vice versa
    */
-  public <K,V> boolean compareMaps(Map<K,V> m1, Map<K,V> m2) {
+  public <K, V> boolean compareMaps(Map<K, V> m1, Map<K, V> m2) {
     return m1.equals(m2);
   }
 
