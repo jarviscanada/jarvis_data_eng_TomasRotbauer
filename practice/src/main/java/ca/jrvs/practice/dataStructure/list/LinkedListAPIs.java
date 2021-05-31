@@ -21,6 +21,6 @@ public class LinkedListAPIs {
     cars.remove("Audi TT");
     cars.remove(0);
     cars.sort(String::compareTo);
-    System.out.println(cars.toString());
+    System.out.println(cars.toArray().toString());
   }
 }
