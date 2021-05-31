@@ -31,13 +31,43 @@ public class TwoSumTest {
     twoSum = new TwoSum();
 
   }
-  
+
   @Test
   public void testBruteForce() {
+    System.out.println("TEST bruteForce()");
+    int[] computed;
     for (int i = 0; i < nums.length; i++) {
-      int[] computed = twoSum.bruteForce(nums[i], target[i]);
+      System.out.print("TEST "+i);
+      computed = twoSum.bruteForce(nums[i], target[i]);
       Arrays.sort(computed);
       Assert.assertArrayEquals(computed, sols[i]);
+      System.out.println(" PASSED");
+    }
+  }
+
+  @Test
+  public void testSorting() {
+    System.out.println("\nTEST sorting()");
+    int[] computed;
+    for (int i = 0; i < nums.length; i++) {
+      computed = twoSum.sorting(nums[i], target[i]);
+      Arrays.sort(computed);
+      System.out.print("TEST "+i);
+      Assert.assertArrayEquals(computed, sols[i]);
+      System.out.println(" PASSED");
+    }
+  }
+
+  @Test
+  public void testLinear() {
+    System.out.println("\nTEST linear()");
+    int[] computed;
+    for (int i = 0; i < nums.length; i++) {
+      computed = twoSum.linear(nums[i], target[i]);
+      Arrays.sort(computed);
+      System.out.print("TEST "+i);
+      Assert.assertArrayEquals(computed, sols[i]);
+      System.out.println(" PASSED");
     }
   }
 }
