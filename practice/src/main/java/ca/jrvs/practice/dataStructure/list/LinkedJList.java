@@ -1,31 +1,22 @@
 package ca.jrvs.practice.dataStructure.list;
 
-import java.util.Arrays;
+public class LinkedJList<E> implements JList<E> {
 
-public class ArrayJLists<E> implements JList<E> {
+  transient int size = 0;
+  transient Node<E> head;
+  transient Node<E> tail;
 
-  private static final int DEFAULT_CAPACITY = 10;
-  transient Object[] elementData;
-  private int size;
+  private static class Node<E> {
+    E item;
+    Node<E> next;
+    Node<E> prev;
 
-  /**
-   * Constructs an empty list with the specified initial capacity.
-   *
-   * @param  initialCapacity  the initial capacity of the list
-   * @throws IllegalArgumentException if the specified initial capacity
-   *         is negative
-   */
-  public ArrayJLists(int initialCapacity) {
-    if (initialCapacity > 0) {
-      this.elementData = new Object[initialCapacity];
-    } else {
-      throw new IllegalArgumentException("Illegal Capacity: "+initialCapacity);
+    Node(E item, Node<E> prev, Node<E> next) {
+      this.item = item;
+      this.prev = prev;
+      this.next = next;
     }
   }
-  public ArrayJLists() {
-    this(DEFAULT_CAPACITY);
-  }
-
   /**
    * Appends the specified element to the end of this list (optional operation).
    *
@@ -36,12 +27,15 @@ public class ArrayJLists<E> implements JList<E> {
    */
   @Override
   public boolean add(E e) {
-    if (size == elementData.length) {
-      int oldCapacity = elementData.length;
-      int newCapacity = oldCapacity + (oldCapacity >> 1);
-      elementData = Arrays.copyOf(elementData, newCapacity);
+    if (head == null) {
+      head = new Node<E>(e, null, null);
+      tail = head;
     }
-    elementData[size] = e;
+    else {
+      Node<E> newItem = new Node<>(e, tail, null);
+      tail.next = newItem;
+      tail = newItem;
+    }
     size++;
     return true;
   }
@@ -57,7 +51,13 @@ public class ArrayJLists<E> implements JList<E> {
    */
   @Override
   public Object[] toArray() {
-    return Arrays.copyOf(elementData, size);
+    Object[] arr = new Object[size];
+    Node<E> node = head;
+    for (int i = 0; i < size; i++){
+      arr[i] = node.item;
+      node = node.next;
+    }
+    return arr;
   }
 
   /**
@@ -89,15 +89,20 @@ public class ArrayJLists<E> implements JList<E> {
    */
   @Override
   public int indexOf(Object o) {
-    if (o == null) {
-      for (int i = size-1; i >= 0; i--)
-        if (elementData[i] == null)
+    Node<E> node = head;
+    if (o == null)
+      for (int i = 0; i < size; i++) {
+        if (node.item == null)
           return i;
-    } else {
-      for (int i = size-1; i >= 0; i--)
-        if (o.equals(elementData[i]))
+        node = node.next;
+      }
+    else
+      for (int i = 0; i < size; i++) {
+        if (node.item.equals(o))
           return i;
-    }
+        node = node.next;
+      }
+
     return -1;
   }
 
@@ -113,16 +118,7 @@ public class ArrayJLists<E> implements JList<E> {
    */
   @Override
   public boolean contains(Object o) {
-    if (o == null) {
-      for (int i = size-1; i >= 0; i--)
-        if (elementData[i] == null)
-          return true;
-    } else {
-      for (int i = size-1; i >= 0; i--)
-        if (o.equals(elementData[i]))
-          return true;
-    }
-    return false;
+    return indexOf(o) >= 0;
   }
 
   /**
@@ -137,7 +133,20 @@ public class ArrayJLists<E> implements JList<E> {
   public E get(int index) {
     if (index < 0 || index >= size)
       return null;
-    return (E)elementData[index];
+
+    Node<E> node;
+    if (index < size - 1 - index) {
+      node = head;
+      for (int i = 0; i < index; i++)
+        node = node.next;
+    }
+    else {
+      node = tail;
+      for (int i = size - 1; i > index; i--)
+        node = node.prev;
+    }
+
+    return node.item;
   }
 
   /**
@@ -153,12 +162,24 @@ public class ArrayJLists<E> implements JList<E> {
     if (index < 0 || index >= size)
       return null;
 
-    E returnObj = (E)elementData[index];
-    for (int i = index; i < size-1; i++)
-      elementData[i] = elementData[i+1];
-    elementData[size-1]=null;
+    Node<E> node;
+    if (index < size - 1 - index) {
+      node = head;
+      for (int i = 0; i < index; i++)
+        node = node.next;
+    }
+    else {
+      node = tail;
+      for (int i = size - 1; i > index; i--)
+        node = node.prev;
+    }
+    if (node.prev != null)
+      node.prev.next = node.next;
+    if (node.next != null)
+    node.next.prev = node.prev;
+
     size--;
-    return returnObj;
+    return node.item;
   }
 
   /**
@@ -167,8 +188,8 @@ public class ArrayJLists<E> implements JList<E> {
    */
   @Override
   public void clear() {
-    for(int i = 0 ; i < size; i++)
-      elementData[i] = null;
-    size=0;
+    head = null;
+    tail = null;
+    size = 0;
   }
 }
