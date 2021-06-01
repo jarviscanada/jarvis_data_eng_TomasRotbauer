@@ -27,7 +27,7 @@ public class LinkedJList<E> implements JList<E> {
    */
   @Override
   public boolean add(E e) {
-    if (head == null) {
+    if (size == 0) {
       head = new Node<E>(e, null, null);
       tail = head;
     }
@@ -145,7 +145,6 @@ public class LinkedJList<E> implements JList<E> {
       for (int i = size - 1; i > index; i--)
         node = node.prev;
     }
-
     return node.item;
   }
 
@@ -177,6 +176,11 @@ public class LinkedJList<E> implements JList<E> {
       node.prev.next = node.next;
     if (node.next != null)
     node.next.prev = node.prev;
+
+    if (index == 0)
+      head = head.next;
+    if (index == size - 1)
+      tail = tail.prev;
 
     size--;
     return node.item;
