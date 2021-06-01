@@ -7,7 +7,7 @@ public class ArrayJLists<E> implements JList<E> {
   transient Object[] elementData;
   private int size;
 
-  public void ArrayJLists() {
+  public ArrayJLists() {
     size = 0;
     elementData = new Object[10];
   }
@@ -143,6 +143,7 @@ public class ArrayJLists<E> implements JList<E> {
     for (int i = index; i < size-1; i++)
       elementData[i] = elementData[i+1];
     elementData[size-1]=null;
+    size--;
     return returnObj;
   }
 
@@ -154,5 +155,6 @@ public class ArrayJLists<E> implements JList<E> {
   public void clear() {
     for(int i = 0 ; i < size; i++)
       elementData[i] = null;
+    size=0;
   }
 }
