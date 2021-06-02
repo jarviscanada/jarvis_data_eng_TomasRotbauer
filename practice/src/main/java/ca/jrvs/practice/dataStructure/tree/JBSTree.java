@@ -17,7 +17,7 @@ public class JBSTree<E> implements JTree<E> {
    * The comparator used to maintain order in this tree map
    * Comparator cannot be null
    */
-  private Comparator<E> comparator;
+  private final Comparator<E> comparator;
   private Node<E> root;
 
   /**
@@ -212,7 +212,6 @@ public class JBSTree<E> implements JTree<E> {
       if (current.getRight() != null) {
         stack.push(current.getRight());
         steps.push(1);
-        continue;
       }
     }
 
@@ -250,7 +249,6 @@ public class JBSTree<E> implements JTree<E> {
       if (current.getRight() != null) {
         stack.push(current.getRight());
         steps.push(1);
-        continue;
       }
     }
 
