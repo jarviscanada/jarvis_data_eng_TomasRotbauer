@@ -70,7 +70,7 @@ public class LinkedJListJDeque<E> implements JDeque<E> {
    */
   @Override
   public void push(E e) {
-    ll.add(e);
+    ll.push(e);
   }
 
   /**

@@ -197,7 +197,7 @@ public class JBSTree<E> implements JTree<E> {
     stack.push(root);
     steps.push(1);
 
-    while(stack.peek() != null) {
+    while(!stack.empty()) {
       current = stack.pop();
       step = steps.pop();
       if (step == 1)
@@ -234,7 +234,7 @@ public class JBSTree<E> implements JTree<E> {
     stack.push(root);
     steps.push(1);
 
-    while(stack.peek() != null) {
+    while(!stack.empty()) {
       current = stack.pop();
       step = steps.pop();
       if (step == 1 && current.getLeft() != null) {
@@ -271,7 +271,7 @@ public class JBSTree<E> implements JTree<E> {
     stack.push(root);
     steps.push(1);
 
-    while(stack.peek() != null) {
+    while(!stack.empty()) {
       current = stack.pop();
       step = steps.pop();
       if (step == 1 && current.getLeft() != null) {

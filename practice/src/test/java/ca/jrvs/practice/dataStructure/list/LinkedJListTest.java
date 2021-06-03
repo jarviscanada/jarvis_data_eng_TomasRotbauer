@@ -21,7 +21,15 @@ public class LinkedJListTest {
 
   @Test
   public void add() {
-    jList.add("hello");
+    initialize();
+    jList.add("hello!");
+    Assert.assertEquals(jList.get(4), "hello!");
+  }
+
+  @Test
+  public void push() {
+    initialize();
+    jList.push("hello");
     Assert.assertEquals(jList.get(0), "hello");
   }
 

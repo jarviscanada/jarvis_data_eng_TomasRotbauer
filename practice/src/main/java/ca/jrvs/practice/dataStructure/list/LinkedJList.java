@@ -40,6 +40,20 @@ public class LinkedJList<E> implements JList<E> {
     return true;
   }
 
+  public boolean push(E e) {
+    if (size == 0) {
+      head = new Node<E>(e, null, null);
+      tail = head;
+    }
+    else {
+      Node<E> newItem = new Node<>(e, null, head);
+      head.prev = newItem;
+      head = newItem;
+    }
+    size++;
+    return true;
+  }
+
   /**
    * Returns an array containing all of the elements in this list in proper sequence (from first to
    * last element).
