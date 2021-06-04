@@ -108,8 +108,7 @@ class JavaGrepImp implements JavaGrep {
       }
       reader.close();
     } catch (IOException ex) {
-      logger.error("In readLines(" + inputFile + "), an IOException was thrown", ex);
-      throw new RuntimeException(ex);
+      throw new RuntimeException("In readLines(" + inputFile + "), an IOException was thrown", ex);
     }
 
     return lines;
