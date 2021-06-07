@@ -64,7 +64,7 @@
       "description": [
         "Twitter App: In progress. Stay tuned!",
         "JDBC App: Implemented a simple data access object (DAO) application using Java Database Connectivity (JDBC) API for accessing and running queries on a small relational database with a couple of tables. The application can perform all the fundamental CRUD (create, read, update \u0026 delete) operations on the local PostgreSQL instance via transactions.",
-        "Grep App: Programmed using Java 8 to develop an application similar to the Linux builtin grep feature. The program searches recursively through a root directory to map out any and all files, and finds the lines that match the user specified Java regular expression. Compilation was handled with the Maven tool, and the final product was packaged into a Docker container using Dockerfiles."
+        "Grep App: Programmed with Java 8 and leveraged its latest features including the stream API and lambda functions to develop an application similar to the Linux built-in grep feature. The program searches recursively through a root directory to map out all files and finds the lines that match the user-specified Java regular expression. Compilation was handled with the Maven tool, and the final product was packaged into a Docker container using Dockerfiles."
       ],
       "git_url": "/core_java",
       "name": "Core Java Apps"
@@ -132,14 +132,14 @@
       "Java",
       "C/C++",
       "Python",
-      "Verilog HDL",
       "Linux/Bash",
       "RDBMS/SQL",
       "Agile/Scrum",
       "Git",
       "Algorithms and data structures",
+      "Verilog HDL",
       "Linear algebra/calculus"
     ]
   },
-  "summary": "I am a recent bachelor of applied science (BASc) graduate from the University of Toronto with a major in computer engineering. I specialized mostly in software, spanning from compiler development all the way to machine learning, as well as computer hardware and digital logic which allows me to understand how software runs at the processor level. As a software developer, I firmly believe that being able to work with/understanding lower levels of abstraction behind a program is a prerequisite to writing highly optimized code, and is what distinguishes a software engineer from a coder. In my eyes, programming is not just a job, but rather a skill and a personal hobby of mine that I enjoy practicing in my spare time. My countless personal and academic projects as well as internship experience demonstrate my wide background in not only software, but also the engineering discipline in general. When it comes to writing code, I tend to think outside the box in order to deliver high quality computer programs."
+  "summary": "I am a recent bachelor of applied science (BASc) graduate from the University of Toronto with a major in computer engineering. I specialized mostly in software, spanning from compiler development all the way to machine learning, as well as computer hardware and digital logic which allows me to understand how software runs at the processor level. As a software developer, I firmly believe that being able to work with/understanding lower levels of abstraction behind a program is a prerequisite to writing highly optimized code, and is what distinguishes a software engineer from a coder. In my eyes, programming is not just a job, but rather a skill and a personal hobby of mine that I enjoy practicing in my spare time. My countless personal and academic projects, as well as internship experience, demonstrate my wide background in not only software but also the engineering discipline in general. When it comes to writing code, I tend to think outside the box to deliver high-quality computer programs."
 }
