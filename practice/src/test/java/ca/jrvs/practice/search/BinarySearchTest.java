@@ -31,5 +31,12 @@ public class BinarySearchTest {
 
   @Test
   public void binarySearchIteration() {
+    Assert.assertEquals(Optional.of(0), binarySearch.binarySearchRecursion(arr, 0));
+    Assert.assertEquals(Optional.of(1), binarySearch.binarySearchRecursion(arr, 1));
+    Assert.assertEquals(Optional.of(2), binarySearch.binarySearchRecursion(arr, 2));
+    Assert.assertEquals(Optional.of(10), binarySearch.binarySearchRecursion(arr, 10));
+    Assert.assertEquals(Optional.of(7), binarySearch.binarySearchRecursion(arr, 7));
+    Assert.assertEquals(Optional.empty(), binarySearch.binarySearchRecursion(arr, -5));
+    Assert.assertEquals(Optional.empty(), binarySearch.binarySearchRecursion(arr, 15));
   }
 }
