@@ -37,9 +37,13 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 
 **Custom Processor Design/Implementation**: Implemented fully functional custom processor in System Verilog with 16-bit pipelined architecture and 19 different instructions on the DE1-SoC Intel FPGA development board. Tested with custom assembly language programs to verify and test correctness of the implementation.
 
-**Jump Car Hardware Mini Game Project**: Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip link -> https://www.youtube.com/watch?v=NfYLQWxKTjU&feature=youtu.be
+**Jump Car Hardware Mini Game Project**: Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip [link](https://www.youtube.com/watch?v=NfYLQWxKTjU&feature=youtu.be)
 
+<<<<<<< HEAD
 **Multidisciplinary Capstone Design Project**: Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000. Project portfolio link (https://tomasrotbauer.wixsite.com/website)
+=======
+**Multidisciplinary Capstone Design Project - [Project Portfolio](https://tomasrotbauer.wixsite.com/website)**: Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000.
+>>>>>>> eeb708db06c1ef7ebf96cb2ae66b469d6ffb4b46
 
 
 ## Professional Experiences
@@ -59,10 +63,17 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 
 
 ## Miscellaneous
+<<<<<<< HEAD
 - Coursera/Duke University - Java Programming: Solving Problems with Software. Link: https://www.coursera.org/account/accomplishments/certificate/7BGRZUB2EH2Q
 - Coursera/Duke University - Programming Foundations with JavaScript, HTML and CSS (with Honours). Link: https://www.coursera.org/account/accomplishments/certificate/TSV3868USM7P
 - HackerRank - Problem Solving (Intermediate). Link: https://www.hackerrank.com/certificates/677cfcea2b01
 - HackerRank - Python (Basic). Link: https://www.hackerrank.com/certificates/6b4cfdf58445
+=======
+- Coursera/Duke University - Java Programming: Solving Problems with Software; [Link](https://www.coursera.org/account/accomplishments/certificate/7BGRZUB2EH2Q)
+- Coursera/Duke University - Programming Foundations with JavaScript, HTML and CSS (with Honours); [Link](https://www.coursera.org/account/accomplishments/certificate/TSV3868USM7P)
+- HackerRank - Problem Solving (Intermediate); [Link](https://www.hackerrank.com/certificates/677cfcea2b01)
+- HackerRank - Python (Basic); [Link](https://www.hackerrank.com/certificates/6b4cfdf58445)
+>>>>>>> eeb708db06c1ef7ebf96cb2ae66b469d6ffb4b46
 - Honours certificate of bilingual studies in extended French
 - English
 - French

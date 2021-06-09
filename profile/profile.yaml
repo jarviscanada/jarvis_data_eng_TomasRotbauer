@@ -95,6 +95,7 @@ highlighted_projects:
     description: Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip link -> https://www.youtube.com/watch?v=NfYLQWxKTjU&feature=youtu.be
   - name: "Multidisciplinary Capstone Design Project"
     description: Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000. Project portfolio link (https://tomasrotbauer.wixsite.com/website)
+
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
 #The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
