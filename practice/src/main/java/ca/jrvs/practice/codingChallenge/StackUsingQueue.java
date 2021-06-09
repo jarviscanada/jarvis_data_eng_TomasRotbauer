@@ -31,8 +31,6 @@ public class StackUsingQueue {
    * Justification: Need to iterate through all n nodes to get the last one (in queue data structure)
    */
   public int pop() {
-    int retVal;
-
     for (int i = 1; i < queue.size(); i++)
       queue.add(queue.remove());
 
