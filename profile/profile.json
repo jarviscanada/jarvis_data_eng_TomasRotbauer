@@ -46,12 +46,12 @@
       "name": "Custom Processor Design/Implementation"
     },
     {
-      "description": "Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip [link](https://www.youtube.com/watch?v=NfYLQWxKTjU\u0026feature=youtu.be)",
+      "description": "Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip link -\u003e https://www.youtube.com/watch?v=NfYLQWxKTjU\u0026feature=youtu.be",
       "name": "Jump Car Hardware Mini Game Project"
     },
     {
-      "description": "Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000.",
-      "name": "Multidisciplinary Capstone Design Project - [Project Portfolio](https://tomasrotbauer.wixsite.com/website)"
+      "description": "Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000. Project portfolio link (https://tomasrotbauer.wixsite.com/website)",
+      "name": "Multidisciplinary Capstone Design Project"
     }
   ],
   "jarvis_projects": [
@@ -74,10 +74,10 @@
   "others": [
     {
       "bullets": [
-        "Coursera/Duke University - Java Programming: Solving Problems with Software; [Link](https://www.coursera.org/account/accomplishments/certificate/7BGRZUB2EH2Q)",
-        "Coursera/Duke University - Programming Foundations with JavaScript, HTML and CSS (with Honours); [Link](https://www.coursera.org/account/accomplishments/certificate/TSV3868USM7P)",
-        "HackerRank - Problem Solving (Intermediate); [Link](https://www.hackerrank.com/certificates/677cfcea2b01)",
-        "HackerRank - Python (Basic); [Link](https://www.hackerrank.com/certificates/6b4cfdf58445)",
+        "Coursera/Duke University - Java Programming: Solving Problems with Software. Link: https://www.coursera.org/account/accomplishments/certificate/7BGRZUB2EH2Q",
+        "Coursera/Duke University - Programming Foundations with JavaScript, HTML and CSS (with Honours). Link: https://www.coursera.org/account/accomplishments/certificate/TSV3868USM7P",
+        "HackerRank - Problem Solving (Intermediate). Link: https://www.hackerrank.com/certificates/677cfcea2b01",
+        "HackerRank - Python (Basic). Link: https://www.hackerrank.com/certificates/6b4cfdf58445",
         "Honours certificate of bilingual studies in extended French"
       ],
       "title": "Certificates"
