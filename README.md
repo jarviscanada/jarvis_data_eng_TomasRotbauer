@@ -39,7 +39,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 
 **Jump Car Hardware Mini Game Project**: Designed and implemented a fun mini game with Verilog HDL on the DE1-SoC Intel FPGA. Short demo video clip link -> https://www.youtube.com/watch?v=NfYLQWxKTjU&feature=youtu.be
 
-**Multidisciplinary Capstone Design Project**: Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000. Project portfolio link (https://tomasrotbauer.wixsite.com/website)
+**Multidisciplinary Capstone Design Project**: Designed and engineered a more efficient aircraft braking technology for Safran Landing Systems on a multidisciplinary engineering team of five senior students. Helped with CAD-ing in SOLIDWORKS and ANSYS to simulate the design. Won best multidisciplinary capstone award, worth $2000. Project portfolio link -> https://tomasrotbauer.wixsite.com/website
 
 
 ## Professional Experiences
