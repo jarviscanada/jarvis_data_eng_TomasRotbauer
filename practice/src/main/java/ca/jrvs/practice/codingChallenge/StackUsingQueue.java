@@ -6,30 +6,24 @@ import java.util.Queue;
 /**
  * Ticket link: https://www.notion.so/jarvisdev/Implement-Stack-using-Queue-c645b705f83849fcb2196ab5f1637684
  */
-public class StackUsingQueues {
+public class StackUsingQueue {
 
-  private final Queue<Integer> q1;
-  private final Queue<Integer> q2;
-  private boolean currentQ1 = true;
+  private final Queue<Integer> queue;
 
   /**
    * Complexity: O(1)
    * Justification: Just initializing
    */
-  public StackUsingQueues() {
-    q1 = new LinkedList<>();
-    q2 = new LinkedList<>();
+  public StackUsingQueue() {
+    queue = new LinkedList<>();
   }
 
   /**
    * Complexity: O(1)
-   * Justification: Just need to link the new node to the end of one of the linked-list queues
+   * Justification: Just need to link the new node to the end of the linked-list queue
    */
   public void push(int x) {
-    if (currentQ1)
-      q1.add(x);
-    else
-      q2.add(x);
+    queue.add(x);
   }
 
   /**
@@ -39,19 +33,10 @@ public class StackUsingQueues {
   public int pop() {
     int retVal;
 
-    if (currentQ1) {
-      while (q1.size() > 1)
-        q2.add(q1.remove());
-      retVal = q1.remove();
-    }
-    else {
-      while (q2.size() > 1)
-        q1.add(q2.remove());
-      retVal = q2.remove();
-    }
+    for (int i = 1; i < queue.size(); i++)
+      queue.add(queue.remove());
 
-    currentQ1 = !currentQ1;
-    return retVal;
+    return queue.remove();
   }
 
   /**
@@ -69,7 +54,6 @@ public class StackUsingQueues {
    * Justification: Only need to check if size > 0
    */
   public boolean empty() {
-    return currentQ1 ? q1.isEmpty() : q2.isEmpty();
+    return queue.isEmpty();
   }
 }
-
