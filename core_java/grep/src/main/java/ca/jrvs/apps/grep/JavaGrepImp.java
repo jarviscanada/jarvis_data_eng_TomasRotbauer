@@ -39,7 +39,7 @@ class JavaGrepImp implements JavaGrep {
     try {
       javaGrepImp.process();
     } catch (Exception ex) {
-      javaGrepImp.logger.error(ex.getMessage(), ex);
+      javaGrepImp.logger.error("An error occurred during processing", ex);
     }
   }
 
@@ -108,8 +108,7 @@ class JavaGrepImp implements JavaGrep {
       }
       reader.close();
     } catch (IOException ex) {
-      ex.printStackTrace();
-      logger.error("In readLines(" + inputFile + "): " + ex.getMessage());
+      throw new RuntimeException("In readLines(" + inputFile + "), an IOException was thrown", ex);
     }
 
     return lines;
@@ -136,20 +135,15 @@ class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void writeToFile(List<String> lines) throws IOException {
-    try {
       FileWriter outputFile = new FileWriter(getOutFile());
       BufferedWriter buffer = new BufferedWriter(outputFile);
 
       //Use for-loop instead of streams to avoid redundant nested try-catch block
       for (String l : lines) {
         buffer.write(l + "\n");
-        logger.info("Adding line: " + l);
+        logger.debug("Adding line: " + l);
       }
       buffer.close();
-    } catch (IOException ex) {
-      logger.error(ex.getMessage());
-      throw ex;
-    }
   }
 
   @Override
