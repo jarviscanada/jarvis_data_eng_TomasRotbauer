@@ -8,8 +8,7 @@ import java.util.Stack;
  */
 public class QueueUsingStacks {
 
-  private final Stack<Integer> empty;
-  private final Stack<Integer> full;
+  private final Stack<Integer> empty, full;
 
   /**
    * Initialize data structure.
@@ -69,8 +68,7 @@ public class QueueUsingStacks {
  */
 class QueueUsingStacksUnitTime {
 
-  private final Stack<Integer> popStack;
-  private final Stack<Integer> pushStack;
+  private final Stack<Integer> popStack, pushStack;
 
   /**
    * Initialize data structure.
