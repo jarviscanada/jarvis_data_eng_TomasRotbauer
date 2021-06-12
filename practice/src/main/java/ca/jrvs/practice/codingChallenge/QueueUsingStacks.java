@@ -8,8 +8,8 @@ import java.util.Stack;
  */
 public class QueueUsingStacks {
 
-  private Stack<Integer> empty;
-  private Stack<Integer> full;
+  private final Stack<Integer> empty;
+  private final Stack<Integer> full;
 
   /**
    * Initialize data structure.
@@ -61,5 +61,67 @@ public class QueueUsingStacks {
    */
   public boolean empty() {
     return full.empty();
+  }
+}
+
+/**
+ * Approach 2
+ */
+class QueueUsingStacksUnitTime {
+
+  private final Stack<Integer> popStack;
+  private final Stack<Integer> pushStack;
+
+  /**
+   * Initialize data structure.
+   * Complexity: O(1)
+   * Justification: Just creating two new stacks
+   */
+  public QueueUsingStacksUnitTime() {
+    popStack = new Stack<>();
+    pushStack = new Stack<>();
+  }
+
+  /**
+   * Push element x to the back of queue.
+   * Complexity: O(1)
+   * Justification: Just push onto pushStack.
+   */
+  public void push(int x) {
+    pushStack.push(x);
+  }
+
+  /**
+   * Removes the element from in front of queue and returns that element.
+   * Complexity: Amortized O(1)
+   * Justification: When popStack is empty, filling it is O(n). However, it then
+   * lasts for n pops without needing to be refilled. Hence, complexity = O(n/n) = O(1).
+   */
+  public int pop() {
+    if (popStack.empty())
+      while (!pushStack.empty())
+        popStack.push(pushStack.pop());
+
+    return popStack.pop();
+  }
+
+  /**
+   * Get the front element.
+   * Complexity: O(1)
+   * Justification: Same as pop, just don't remove the element.
+   */
+  public int peek() {
+    int retVal = pop();
+    popStack.push(retVal);
+    return retVal;
+  }
+
+  /**
+   * Returns whether the queue is empty.
+   * Complexity: O(1)
+   * Justification: Just check if empty.
+   */
+  public boolean empty() {
+    return popStack.empty() && pushStack.empty();
   }
 }
