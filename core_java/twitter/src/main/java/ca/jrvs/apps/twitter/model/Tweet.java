@@ -1,4 +1,4 @@
-package ca.jrvs.apps.twitter.twitter.model;
+package ca.jrvs.apps.twitter.model;
 
 public class Tweet {
 
