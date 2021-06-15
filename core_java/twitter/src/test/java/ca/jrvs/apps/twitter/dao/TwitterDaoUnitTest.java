@@ -8,7 +8,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.example.JsonParser;
 import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
@@ -33,14 +32,8 @@ public class TwitterDaoUnitTest {
   @InjectMocks
   TwitterDao dao;
 
-  private TwitterDao twitterDao;
-  private HttpHelper httpHelper;
   private Tweet tweet;
-  private static Random random = new Random();
-  private static final String CONSUMER_KEY = System.getenv("consumerKey");
-  private static final String CONSUMER_SECRET = System.getenv("consumerSecret");
-  private static final String ACCESS_TOKEN = System.getenv("accessToken");
-  private static final String TOKEN_SECRET = System.getenv("tokenSecret");
+  private static final Random random = new Random();
 
   //Test happy path
   //however, we don't want to call parseResponseBody.
@@ -102,11 +95,9 @@ public class TwitterDaoUnitTest {
 
   @Before
   public void setUp() {
-    httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
-    twitterDao = new TwitterDao(httpHelper);
     tweet = new Tweet();
 
-    tweet.setText(String.valueOf(random.nextLong()) + " #abc");
+    tweet.setText(random.nextLong() + " #abc");
     Coordinates coordinates = new Coordinates();
     List<Float> l1 = new ArrayList<>();
     l1.add(1.0f);
@@ -142,10 +133,51 @@ public class TwitterDaoUnitTest {
 
   @Test
   public void findById() {
+    when(mockHelper.httpGet(isNotNull())).thenThrow(new RuntimeException("mock"));
+    try {
+      dao.findById("1404868813666111491");
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
 
+    when(mockHelper.httpGet(isNotNull())).thenReturn(null);
+    TwitterDao spyDao = Mockito.spy(dao);
+    Tweet expectedTweet = null;
+    try {
+      expectedTweet = JsonParser.toObjectFromJson(tweetJsonStr, Tweet.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    //mock parseResponseBody
+    doReturn(expectedTweet).when(spyDao).parseResponseBody(any(), anyInt());
+    Tweet response = spyDao.findById("1404868813666111491");
+    assertNotNull(response);
+    assertNotNull(response.getText());
   }
 
   @Test
   public void deleteById() {
+    when(mockHelper.httpPost(isNotNull())).thenThrow(new RuntimeException("mock"));
+    try {
+      dao.deleteById("1404868813666111491");
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+
+    when(mockHelper.httpPost(isNotNull())).thenReturn(null);
+    TwitterDao spyDao = Mockito.spy(dao);
+    Tweet expectedTweet = null;
+    try {
+      expectedTweet = JsonParser.toObjectFromJson(tweetJsonStr, Tweet.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    //mock parseResponseBody
+    doReturn(expectedTweet).when(spyDao).parseResponseBody(any(), anyInt());
+    Tweet response = spyDao.deleteById("1404868813666111491");
+    assertNotNull(response);
+    assertNotNull(response.getText());
   }
 }
