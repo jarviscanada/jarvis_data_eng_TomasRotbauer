@@ -60,6 +60,17 @@ public class TwitterServiceUnitTest {
     twitterService.postTweet(tweet);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void postTweetBadCoordinates() {
+    Coordinates coordinates = new Coordinates();
+    List<Float> l1 = new ArrayList<>();
+    l1.add(200.0f);
+    l1.add(-200.0f);
+    coordinates.setCoordinates(l1);
+    tweet.setCoordinates(coordinates);
+    twitterService.postTweet(tweet);
+  }
+
   @Test
   public void postTweet() {
     when(dao.create(any())).thenReturn(tweet);
