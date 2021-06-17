@@ -27,18 +27,14 @@ public class TwitterServiceIntTest {
   private CrdDao<Tweet, String> dao;
   private TwitterService twitterService;
 
-  @BeforeClass
-  public static void setUpTweetCoordinates() {
+  @Before
+  public void setUp() {
     Coordinates coordinates = new Coordinates();
     List<Float> l1 = new ArrayList<>();
     l1.add(1.0f);
     l1.add(-1.0f);
     coordinates.setCoordinates(l1);
     tweet.setCoordinates(coordinates);
-  }
-
-  @Before
-  public void setUp() {
     tweet.setText(String.valueOf(System.currentTimeMillis()) + " #abc");
     httpHelper =  new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
     dao = new TwitterDao(httpHelper);

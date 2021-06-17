@@ -4,18 +4,20 @@ import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.service.Service;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TwitterController implements Controller {
 
   private static final String COORD_SEP = ":";
-  private static final String COMMA = ",";
   private static final String POST_USAGE = "Usage: TwitterCLIApp post \"tweet text\""
       + " [\"longitude:latitude\"]";
-  private static final String SHOW_USAGE = "Usage: TwitterCLIApp show tweet_id";
+  private static final String SHOW_USAGE = "Usage: TwitterCLIApp show tweet_id "
+      + "[created_at] [id] [id_str] [text] [entities] [coordinates] [retweet_count] "
+      + "[favorite_count] [favorited] [retweeted]";
   private static final String DELETE_USAGE = "Usage: TwitterCLIApp delete tweet_id1 [tweet_id2 ...]";
 
-  private Service service;
+  private final Service service;
 
   //@Autowired
   public TwitterController(Service service) {
@@ -74,7 +76,13 @@ public class TwitterController implements Controller {
    */
   @Override
   public Tweet showTweet(String[] args) {
-    return null;
+    if (args.length < 2 || args.length > 12)
+      throw new IllegalArgumentException(SHOW_USAGE);
+
+    String id_str = args[1];
+    String[] fields = Arrays.copyOfRange(args, 2, args.length);
+
+    return service.showTweet(id_str, fields);
   }
 
   /**
@@ -86,6 +94,10 @@ public class TwitterController implements Controller {
    */
   @Override
   public List<Tweet> deleteTweet(String[] args) {
-    return null;
+    if (args.length < 2)
+      throw new IllegalArgumentException(DELETE_USAGE);
+
+    String[] ids = Arrays.copyOfRange(args, 1, args.length);
+    return service.deleteTweets(ids);
   }
 }

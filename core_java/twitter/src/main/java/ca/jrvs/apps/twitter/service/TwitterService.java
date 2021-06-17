@@ -83,7 +83,7 @@ public class TwitterService implements Service {
     List<Tweet> retVal = new ArrayList<>();
     Arrays.stream(ids).forEach(id -> {
       validateTweetId(id);
-      retVal.add((Tweet)dao.deleteById(id));
+      retVal.add((Tweet) dao.deleteById(id));
     });
     return retVal;
   }
@@ -106,7 +106,10 @@ public class TwitterService implements Service {
   }
 
   private void validateTweetId(String id) {
-    if (id.length() > 20)
-      throw new IllegalArgumentException("Tweet id too long");
+    try {
+      Long.parseLong(id);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Tweet id must be a 64-bit integer", e);
+    }
   }
 }
