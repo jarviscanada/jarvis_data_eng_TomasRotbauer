@@ -62,13 +62,15 @@ public class TwitterServiceUnitTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void postTweetBadCoordinates() {
+    Tweet temp = new Tweet();
+    temp.setText("test");
     Coordinates coordinates = new Coordinates();
     List<Float> l1 = new ArrayList<>();
     l1.add(200.0f);
     l1.add(-200.0f);
     coordinates.setCoordinates(l1);
-    tweet.setCoordinates(coordinates);
-    twitterService.postTweet(tweet);
+    temp.setCoordinates(coordinates);
+    twitterService.postTweet(temp);
   }
 
   @Test
@@ -102,7 +104,7 @@ public class TwitterServiceUnitTest {
   @Test
   public void deleteTweets() {
     when(dao.deleteById(any())).thenReturn(new Tweet());
-    String[] ids = {"12345678912345678912"};
+    String[] ids = {"123456789123456789"};
     List<Tweet> responses = twitterService.deleteTweets(ids);
     assertNotNull(responses);
   }
