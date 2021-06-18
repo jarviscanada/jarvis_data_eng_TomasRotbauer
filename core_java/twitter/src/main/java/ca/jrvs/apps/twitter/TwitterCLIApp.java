@@ -13,7 +13,10 @@ import ca.jrvs.apps.twitter.service.TwitterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwitterCLIApp {
   public static final String USAGE = "Usage: TwitterCLIApp <post | show | delete> [options]";
 
@@ -22,16 +25,19 @@ public class TwitterCLIApp {
   private static final String ACCESS_TOKEN = System.getenv("accessToken");
   private static final String TOKEN_SECRET = System.getenv("tokenSecret");
 
-  private static Controller controller;
+  private Controller controller;
+
+  @Autowired
+  public TwitterCLIApp(Controller controller) {
+    this.controller = controller;
+  }
 
   public static void main(String[] args) throws IllegalArgumentException {
-    TwitterCLIApp app = new TwitterCLIApp();
-
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET,
         ACCESS_TOKEN, TOKEN_SECRET);
     CrdDao<Tweet, String> dao = new TwitterDao(httpHelper);
     Service service = new TwitterService(dao);
-    controller = new TwitterController(service);
+    TwitterCLIApp app = new TwitterCLIApp(new TwitterController(service));
 
     app.run(args);
   }
