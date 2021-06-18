@@ -34,12 +34,12 @@ public class TwitterCLIBean {
   }
 
   @Bean
-  public Service service(CrdDao<Tweet, String> dao) {
+  public Service service(CrdDao dao) {
     return new TwitterService(dao);
   }
 
   @Bean
-  public CrdDao<Tweet, String> crdDao(HttpHelper httpHelper) {
+  public CrdDao crdDao(HttpHelper httpHelper) {
     return new TwitterDao(httpHelper);
   }
 
