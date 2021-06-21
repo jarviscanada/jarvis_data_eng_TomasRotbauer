@@ -13,7 +13,7 @@ public class TwitterController implements Controller {
 
   private static final String COORD_SEP = ":";
   private static final String POST_USAGE = "Usage: TwitterCLIApp post \"tweet text\""
-      + " [\"longitude:latitude\"]";
+      + " [longitude:latitude]";
   private static final String SHOW_USAGE = "Usage: TwitterCLIApp show tweet_id "
       + "[created_at] [id] [id_str] [text] [entities] [coordinates] [retweet_count] "
       + "[favorite_count] [favorited] [retweeted]";
