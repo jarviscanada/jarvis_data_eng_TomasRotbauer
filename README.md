@@ -1,14 +1,14 @@
 # Tomas Rotbauer . Jarvis Consulting
 
-I am a recent bachelor of applied science (BASc) graduate from the University of Toronto with a major in computer engineering. I specialized mostly in software, spanning from compiler development all the way to machine learning, as well as computer hardware and digital logic which allows me to understand how software runs at the processor level. As a software developer, I firmly believe that being able to work with/understanding lower levels of abstraction behind a program is a prerequisite to writing highly optimized code, and is what distinguishes a software engineer from a coder. In my eyes, programming is not just a job, but rather a skill and a personal hobby of mine that I enjoy practicing in my spare time. My countless personal and academic projects, as well as internship experience, demonstrate my wide background in not only software but also the engineering discipline in general. When it comes to writing code, I tend to think outside the box to deliver high-quality computer programs.
+I am a recent bachelor of applied science (BASc) graduate from the University of Toronto with a major in computer engineering. I specialized mostly in software, spanning from compiler development all the way to machine learning, as well as computer hardware and digital logic which allows me to understand how software runs at the processor level. As a software developer, I believe that being able to work with/understanding lower levels of abstraction behind a program is a prerequisite to writing highly optimized code. In my eyes, programming is not just a job but rather a skill and a personal hobby of mine that I enjoy practicing in my spare time. My countless personal and academic projects, as well as internship experience, demonstrate my wide background in software as well as the general engineering discipline. My experiences have taught me how to think outside the box when developing software, and I always strive to find the most optimized solution to the problem.
 
 ## Skills
 
-**Proficient:** Java, C/C++, Python, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Algorithms and data structures, Verilog HDL, Linear algebra/calculus
+**Proficient:** Java, C/C++, Python, Linux/Bash, RDBMS/SQL, HTTP/REST API, Agile/Scrum, Git, Algorithms and data structures, Verilog HDL, Linear algebra/calculus
 
-**Competent:** Docker, Maven, Neural networks, Processor architecture, ARM Assembly Language, MATLAB
+**Competent:** Docker, Maven, Concurrent programming, Neural networks, Processor architecture, Assembly Language
 
-**Familiar:** JavaScript, HTML/CSS, TensorFlow, LLVM, GNU Bison, Networking (OSI model)
+**Familiar:** JavaScript, HTML/CSS, TensorFlow, LLVM, GNU Bison, Networking (OSI model), MATLAB
 
 ## Jarvis Projects
 
@@ -19,7 +19,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 
 **Core Java Apps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_TomasRotbauer/tree/master/core_java)]:
       
-  - Twitter App: In progress. Stay tuned!
+  - Twitter App: Developed a command line CRUD application capable of posting, viewing, and deleting tweets from a user's Twitter account. Learned Twitter REST API and leveraged HTTP for client-server communication. The application follows the MVC architecture and comprises multiple layers to facilitate development and testing. Spring Boot was used for dependency management, Docker for deployment, and Maven for building and packaging the application.
   - JDBC App: Implemented a simple data access object (DAO) application using Java Database Connectivity (JDBC) API for accessing and running queries on a small relational database with a couple of tables. The application can perform all the fundamental CRUD (create, read, update & delete) operations on the local PostgreSQL instance via transactions.
   - Grep App: Programmed with Java 8 and leveraged its latest features including the stream API and lambda functions to develop an application similar to the Linux built-in grep feature. The program searches recursively through a root directory to map out all files and finds the lines that match the user-specified Java regular expression. Compilation was handled with the Maven tool, and the final product was packaged into a Docker container using Dockerfiles.
 
