@@ -1,11 +1,11 @@
 package ca.jrvs.practice.codingChallenge;
 
-import java.util.Locale;
-
 /**
  * Ticket link: https://www.notion.so/jarvisdev/Valid-Palindrome-3041533e13434bb8b0c80278bb19af66
  */
 public class ValidPalindrome {
+
+  private String str;
 
   /**
    * Complexity: O(n)
@@ -23,6 +23,25 @@ public class ValidPalindrome {
         return false;
     
     return true;
+  }
+
+  /**
+   * Complexity: O(n)
+   * Justification: need to iterate through each character and sanitize it as well as compare.
+   */
+  public boolean recursion(String s) {
+    str = sanitizeString(s);
+    return recursiveSolution(0, str.length()-1);
+  }
+
+  private boolean recursiveSolution(int front, int back) {
+    if (front >= back)
+      return true;
+
+    if (str.charAt(front) != str.charAt(back))
+      return false;
+
+    return recursiveSolution(front+1, back-1);
   }
 
   private String sanitizeString(String s) {

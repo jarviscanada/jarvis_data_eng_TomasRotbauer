@@ -28,4 +28,19 @@ public class ValidPalindromeTest {
     assertFalse(validPalindrome.twoPointers("race 1 car"));
     assertFalse(validPalindrome.twoPointers("abb"));
   }
+
+  @Test
+  public void recursion() {
+    assertTrue(validPalindrome.recursion(" "));
+    assertTrue(validPalindrome.recursion("a,!"));
+    assertTrue(validPalindrome.recursion("Aa"));
+    assertTrue(validPalindrome.recursion("aBA//"));
+    assertTrue(validPalindrome.recursion("aw 1wa"));
+    assertTrue(validPalindrome.recursion("race car"));
+    assertTrue(validPalindrome.recursion("A man, a plan, a canal: Panama"));
+
+    assertFalse(validPalindrome.recursion("My name is Eminem!"));
+    assertFalse(validPalindrome.recursion("race 1 car"));
+    assertFalse(validPalindrome.recursion("abb"));
+  }
 }
