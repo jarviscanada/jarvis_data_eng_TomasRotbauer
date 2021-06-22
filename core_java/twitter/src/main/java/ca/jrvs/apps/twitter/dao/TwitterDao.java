@@ -9,11 +9,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class TwitterDao implements CrdDao<Tweet, String> {
+
+  final Logger logger = LoggerFactory.getLogger(TwitterDao.class);
 
   //URI constants
   private static final String API_BASE_URI = "https://api.twitter.com";
@@ -28,10 +33,12 @@ public class TwitterDao implements CrdDao<Tweet, String> {
   //Response code
   private static final int HTTP_OK = 200;
 
-  private HttpHelper httpHelper;
+  private final HttpHelper httpHelper;
 
   @Autowired
   public TwitterDao(HttpHelper httpHelper) {
+    //Use default logger config
+    BasicConfigurator.configure();
     this.httpHelper = httpHelper;
   }
 
@@ -53,7 +60,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
       + AMPERSAND + "lat" + EQUAL +
           entity.getCoordinates().getCoordinates().get(1).toString());
     } catch (URISyntaxException e) {
-      e.printStackTrace();
+      logger.error("Couldn't create new URI object", e);
     }
 
     //Construct HTTP request
@@ -77,7 +84,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
       uri = new URI(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id" + EQUAL
           + l);
     } catch (URISyntaxException e) {
-      e.printStackTrace();
+      logger.error("Couldn't create new URI object", e);
     }
 
     //Construct HTTP request
@@ -100,7 +107,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
     try {
       uri = new URI(API_BASE_URI + DELETE_PATH + "/" + l + ".json");
     } catch (URISyntaxException e) {
-      e.printStackTrace();
+      logger.error("Couldn't create new URI object", e);
     }
 
     //Construct HTTP request
@@ -111,7 +118,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
   }
 
   protected Tweet parseResponseBody(HttpResponse response, int expectedStatusCode) {
-    Tweet tweet = null;
+    Tweet tweet;
 
     //Check response status
     int status = response.getStatusLine().getStatusCode();

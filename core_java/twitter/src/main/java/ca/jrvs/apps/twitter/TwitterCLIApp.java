@@ -13,11 +13,17 @@ import ca.jrvs.apps.twitter.service.TwitterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TwitterCLIApp {
+
+  final Logger logger = LoggerFactory.getLogger(TwitterCLIApp.class);
+
   public static final String USAGE = "Usage: TwitterCLIApp <post | show | delete> [options]";
 
   private static final String CONSUMER_KEY = System.getenv("consumerKey");
@@ -33,6 +39,9 @@ public class TwitterCLIApp {
   }
 
   public static void main(String[] args) throws IllegalArgumentException {
+    //Use default logger config
+    BasicConfigurator.configure();
+
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET,
         ACCESS_TOKEN, TOKEN_SECRET);
     CrdDao<Tweet, String> dao = new TwitterDao(httpHelper);
@@ -66,7 +75,7 @@ public class TwitterCLIApp {
       try {
         System.out.println(JsonParser.toJson(t, true, true));
       } catch (JsonProcessingException e) {
-        e.printStackTrace();
+        logger.error("Couldn't process Tweet object to JSON", e);
       }
     });
 

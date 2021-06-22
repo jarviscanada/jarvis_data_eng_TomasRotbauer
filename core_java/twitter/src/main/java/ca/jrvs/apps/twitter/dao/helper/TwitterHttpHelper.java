@@ -13,10 +13,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TwitterHttpHelper implements HttpHelper {
+
+  final Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
 
   /**
    * Dependencies are specified as private member variables
@@ -35,6 +40,8 @@ public class TwitterHttpHelper implements HttpHelper {
    */
   public TwitterHttpHelper(String consumerKey, String consumerSecret, String accessToken,
       String tokenSecret) {
+    //Use default logger config
+    BasicConfigurator.configure();
     consumer = new CommonsHttpOAuthConsumer(consumerKey, consumerSecret);
     consumer.setTokenWithSecret(accessToken, tokenSecret);
     httpClient = HttpClientBuilder.create().build();
@@ -44,6 +51,8 @@ public class TwitterHttpHelper implements HttpHelper {
    * Default constructor (not used for now)
    */
   public TwitterHttpHelper() {
+    //Use default logger config
+    BasicConfigurator.configure();
     String consumerKey = System.getenv("consumerKey");
     String consumerSecret = System.getenv("consumerSecret");
     String accessToken = System.getenv("accessToken");
@@ -84,13 +93,13 @@ public class TwitterHttpHelper implements HttpHelper {
       consumer.sign(request);
     } catch (OAuthMessageSignerException | OAuthExpectationFailedException
         | OAuthCommunicationException e) {
-      e.printStackTrace();
+      logger.error("Couldn't sign HTTP send request", e);
     }
 
     try {
       response = httpClient.execute((HttpUriRequest) request);
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error("Couldn't execute HTTP request", e);
     }
 
     return response;
