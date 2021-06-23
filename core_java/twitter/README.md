@@ -16,7 +16,7 @@ This Java application allows users to post, show, and delete tweets on their Twi
 # Design
 The application was built based on the MVC architecture. It comprises a model (M), no view in this case (V), and a controller (C) that is subdivided into four hierarchical, interdependent layers. Each layer is described in detail below.
 ## UML diagram
-![alt text]( https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/twitterReadme/core_java/twitter/assets/twitter.png "Twitter App UML Diagram")
+![alt text]( https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/release/core_java/twitter/assets/twitter.png "Twitter App UML Diagram")
 ## Components
 ### Application (Top Layer)
 The top layer is responsible for reading and parsing user inputs from the command line (passed in as program parameters). The program checks if the user has provided one of the three valid commands, and passes the instruction down to the controller layer.
