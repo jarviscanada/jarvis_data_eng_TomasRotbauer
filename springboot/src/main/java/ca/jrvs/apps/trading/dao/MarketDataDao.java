@@ -117,7 +117,13 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     List<IexQuote> quoteArray = new ArrayList<>();
     for (String ticker : tickers) {
       try {
-        quoteArray.add(m.readValue(IexQuotesJson.getString(ticker), IexQuote.class));
+        String quoteStr = IexQuotesJson.getJSONObject(ticker)
+            .getJSONObject("quote").toString();
+        if (quoteStr == null) {
+          throw new IllegalArgumentException("Invalid ticker " + ticker);
+        }
+        IexQuote quote = m.readValue(quoteStr, IexQuote.class);
+        quoteArray.add(quote);
       } catch (IOException e) {
         logger.error("Couldn't unmarshal JSON to IexQuote", e);
       }
