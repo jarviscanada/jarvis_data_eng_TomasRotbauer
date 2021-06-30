@@ -47,7 +47,7 @@ public class Application implements CommandLineRunner {
     if (args.length != 2)
       throw new IllegalArgumentException("USAGE: Application show ticker_id");
     if (args[0].equals("show")) {
-      System.out.println(quoteService.findIexQuoteByTicker(args[1]));
+      System.out.println(quoteService.findIexQuoteByTicker(args[1]).getSymbol());
     }
     else
       throw new IllegalArgumentException("Command " + args[1] + " not supported.");
