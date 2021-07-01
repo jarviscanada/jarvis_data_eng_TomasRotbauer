@@ -25,6 +25,7 @@ public class QuoteDaoIntTest {
 
   @Before
   public void insertOne() {
+    savedQuote = new Quote();
     savedQuote.setAskPrice(10d);
     savedQuote.setAskSize(10);
     savedQuote.setBidrice(10.2d);
@@ -36,7 +37,7 @@ public class QuoteDaoIntTest {
 
   @Test
   public void test() {
-    return;
+    assertTrue(true);
   }
 
   @After

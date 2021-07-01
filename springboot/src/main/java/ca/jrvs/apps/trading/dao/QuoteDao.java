@@ -151,7 +151,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
       throw new IllegalArgumentException("Ticker cannot be empty");
     }
     String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + " =?";
-    jdbcTemplate.update(deleteSql);
+    jdbcTemplate.update(deleteSql, ticker);
   }
 
   @Override
