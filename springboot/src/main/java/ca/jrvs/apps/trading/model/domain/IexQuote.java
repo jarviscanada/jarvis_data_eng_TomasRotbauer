@@ -119,7 +119,7 @@ public class IexQuote {
   @JsonProperty("avgTotalVolume")
   private long avgTotalVolume;
   @JsonProperty("iexBidPrice")
-  private long iexBidPrice;
+  private double iexBidPrice;
   @JsonProperty("iexBidSize")
   private long iexBidSize;
   @JsonProperty("iexAskPrice")
@@ -450,7 +450,7 @@ public class IexQuote {
   }
 
   @JsonProperty("iexBidPrice")
-  public long getIexBidPrice() {
+  public double getIexBidPrice() {
     return iexBidPrice;
   }
 
