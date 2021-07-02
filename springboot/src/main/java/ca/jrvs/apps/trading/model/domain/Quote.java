@@ -39,7 +39,7 @@ public class Quote implements Entity<String> {
     return bidPrice;
   }
 
-  public void setBidrice(Double bidPrice) {
+  public void setBidPrice(Double bidPrice) {
     this.bidPrice = bidPrice;
   }
 
