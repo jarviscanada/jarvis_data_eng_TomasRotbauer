@@ -43,15 +43,15 @@ public class QuoteService {
   public void updateMarketData() throws ResourceNotFoundException {
     List<Quote> quotes = quoteDao.findAll();
     Optional<IexQuote> iexQuote;
-    for (int i = 0; i < quotes.size(); i++) {
-      iexQuote = marketDataDao.findById(quotes.get(i).getId());
+    for (Quote quote : quotes) {
+      iexQuote = marketDataDao.findById(quote.getId());
       if (!iexQuote.isPresent()) {
-        logger.error("Ticker " + quotes.get(i).getId() +
+        logger.error("Ticker " + quote.getId() +
             " was not found in IEX");
-        throw new ResourceNotFoundException("Ticker " + quotes.get(i).getId() +
+        throw new ResourceNotFoundException("Ticker " + quote.getId() +
             " was not found in IEX");
       }
-      quotes.set(i, buildQuoteFromIexQuote(iexQuote.get()));
+      quoteDao.save(buildQuoteFromIexQuote(iexQuote.get()));
     }
   }
 
