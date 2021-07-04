@@ -40,19 +40,23 @@ public class QuoteService {
    * @throws org.springframework.dao.DataAccessException if unable to retrieve data
    * @throws IllegalArgumentException for invalid input
    */
-  public void updateMarketData() throws ResourceNotFoundException {
+  public List<Quote> updateMarketData() throws ResourceNotFoundException {
     List<Quote> quotes = quoteDao.findAll();
     Optional<IexQuote> iexQuote;
-    for (Quote quote : quotes) {
-      iexQuote = marketDataDao.findById(quote.getId());
+    Quote quote;
+    for (int i = 0; i < quotes.size(); i++) {
+      iexQuote = marketDataDao.findById(quotes.get(i).getId());
       if (!iexQuote.isPresent()) {
-        logger.error("Ticker " + quote.getId() +
+        logger.error("Ticker " + quotes.get(i).getId() +
             " was not found in IEX");
-        throw new ResourceNotFoundException("Ticker " + quote.getId() +
+        throw new ResourceNotFoundException("Ticker " + quotes.get(i).getId() +
             " was not found in IEX");
       }
-      quoteDao.save(buildQuoteFromIexQuote(iexQuote.get()));
+      quote = buildQuoteFromIexQuote(iexQuote.get());
+      quotes.set(i, quote);
+      quoteDao.save(quote);
     }
+    return quotes;
   }
 
   /**
