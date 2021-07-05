@@ -92,7 +92,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
     for (Integer id : ids) {
       row = findById(id);
       if (!row.isPresent())
-        throw new DataRetrievalFailureException("Can't find trader id: " + id);
+        continue;
       results.add(row.get());
     }
     return results;
