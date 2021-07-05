@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Entity;
-import ca.jrvs.apps.trading.model.domain.Quote;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
