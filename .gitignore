@@ -7,3 +7,4 @@ intellij-java-google-style.xml
 *.iml
 **/grep/data
 **/dependency-reduced-pom.xml
+*.sql.swp
