@@ -62,6 +62,15 @@ public class AccountDao extends JdbcCrudDao<Account> {
     throw new UnsupportedOperationException("Not implemented");
   }
 
+  public void updateBalance(Integer accountId, Double newAmount) {
+    if (accountId == null) {
+      throw new NullPointerException("Account id can't be null");
+    }
+    String updateSql = "UPDATE " + getTableName() + " SET amount =? " + "WHERE "
+        + getIdColumnName() + " =?";
+    getJdbcTemplate().update(updateSql, newAmount, accountId);
+  }
+
   @Override
   public <S extends Account> Iterable<S> saveAll(Iterable<S> iterable) {
     throw new UnsupportedOperationException("Not implemented");

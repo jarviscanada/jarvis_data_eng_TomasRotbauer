@@ -145,4 +145,11 @@ public class SecurityOrderDaoIntTest {
     securityOrderDao.deleteAll();
     assertFalse(securityOrderDao.existsById(1));
   }
+
+  @Test
+  public void deleteByAccountId() {
+    assertTrue(securityOrderDao.existsById(1));
+    securityOrderDao.deleteByAccountId(1);
+    assertFalse(securityOrderDao.existsById(1));
+  }
 }

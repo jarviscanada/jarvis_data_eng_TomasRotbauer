@@ -67,6 +67,14 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
     throw new UnsupportedOperationException("Not implemented");
   }
 
+  public void deleteByAccountId(Integer accountId) {
+    if (accountId == null) {
+      throw new NullPointerException("Account id can't be null");
+    }
+    String deleteSql = "DELETE FROM " + getTableName() + " WHERE account_id =?";
+    getJdbcTemplate().update(deleteSql, accountId);
+  }
+
   @Override
   public void delete(SecurityOrder trader) {
     throw new UnsupportedOperationException("Not implemented");

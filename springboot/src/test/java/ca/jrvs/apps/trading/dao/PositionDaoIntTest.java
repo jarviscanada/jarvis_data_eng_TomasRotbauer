@@ -145,4 +145,10 @@ public class PositionDaoIntTest {
     assertEquals(1, result.get().getAccountId(), 0);
     assertEquals("AMZN", result.get().getTicker());
   }
+
+  @Test
+  public void existsByTraderId() {
+    assertTrue(positionDao.existsByAccountId(1));
+    assertFalse(positionDao.existsByAccountId(0));
+  }
 }

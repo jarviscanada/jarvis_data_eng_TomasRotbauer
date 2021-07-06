@@ -110,4 +110,10 @@ public class AccountDaoIntTest {
     accountDao.deleteAll();
     assertFalse(accountDao.existsById(1));
   }
+
+  @Test
+  public void updateBalance() {
+    accountDao.updateBalance(1, 29.0);
+    assertEquals(29.0, accountDao.findById(1).get().getAmount(), 0);
+  }
 }

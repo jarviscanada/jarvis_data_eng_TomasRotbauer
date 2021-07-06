@@ -103,6 +103,15 @@ public class PositionDao {
     return results;
   }
 
+  public boolean existsByAccountId(Integer accountId) {
+    Optional<Position> entity = Optional.empty();
+    String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + getIdColumnName() + " =?";
+
+    return !getJdbcTemplate().query(selectSql, BeanPropertyRowMapper.newInstance(getEntityClass()),
+        accountId).isEmpty();
+
+  }
+
   public long count() {
     return findAll().size();
   }
