@@ -4,6 +4,7 @@ import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.PositionDao;
 import ca.jrvs.apps.trading.dao.SecurityOrderDao;
 import ca.jrvs.apps.trading.dao.TraderDao;
+import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,52 @@ public class TraderAccountService {
    * @throws IllegalArgumentException if a trader has null fields or id is not null.
    */
   public TraderAccountView createTraderAndAccount(Trader trader) {
+
+  }
+
+  /**
+   * A trader can be deleted iff it has no open position and 0 cash balance
+   *  - validate traderID
+   *  - get trader account by traderId and check positions
+   *  - get positions by accountId and check positions
+   *  delete all securityOrders, account, trader (in this order)
+   *
+   * @param traderId must not be null
+   * @throws IllegalArgumentException if traderId is null or not found or unable to delete
+   */
+  public void deleteTraderById(Integer traderId) {
+
+  }
+
+  /**
+   * Deposit a fund to an account by traderId
+   * - validate user input
+   * - account = accountDao.findByTraderId
+   * - accountDao.updateAmountById
+   *
+   * @param traderId must not be null
+   * @param fund must be greater than 0
+   * @return updated account
+   * @throws IllegalArgumentException if traderId is null or not found, and fund is less or equal to 0
+   */
+  public Account deposit(Integer traderId, Double fund) {
+
+  }
+
+  /**
+   * Withdraw a fund to an account by traderId
+   *
+   * - validate user input
+   * - account = accountDao.findByTraderId
+   * - accountDao.updateAmountById
+   *
+   * @param traderId traderId
+   * @param fund amount can't be 0
+   * @return updated Account
+   * @throws IllegalArgumentException if traderId is null or not found,
+   * fund is less or equal to 0, and insufficient fund
+   */
+  public Account withdraw(Integer traderId, double fund) {
 
   }
 }
