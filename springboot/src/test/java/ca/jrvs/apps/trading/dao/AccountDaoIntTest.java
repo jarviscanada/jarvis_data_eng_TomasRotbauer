@@ -3,6 +3,7 @@ package ca.jrvs.apps.trading.dao;
 import static org.junit.Assert.*;
 
 import ca.jrvs.apps.trading.TestConfig;
+import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,15 +24,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
 @Sql({"classpath:schema.sql"})
-public class TraderDaoIntTest {
+public class AccountDaoIntTest {
+
+  @Autowired
+  private AccountDao accountDao;
 
   @Autowired
   private TraderDao traderDao;
 
+  private static Account savedAccount;
   private static Trader savedTrader;
 
   @BeforeClass
-  public static void setUpTrader() {
+  public static void setUpAccount() {
     savedTrader = new Trader();
     savedTrader.setId(1);
     savedTrader.setFirstName("John");
@@ -44,58 +49,65 @@ public class TraderDaoIntTest {
       System.out.println("Cannot parse the date specified");
     }
     savedTrader.setEmail("johnwick@gmail.com");
+
+    savedAccount = new Account();
+    savedAccount.setId(1);
+    savedAccount.setTraderId(1);
+    savedAccount.setAmount(2.00);
   }
 
   @Before
   public void insertOne() {
     traderDao.save(savedTrader);
+    accountDao.save(savedAccount);
   }
 
   @After
   public void deleteOne() {
+    accountDao.deleteById(1);
     traderDao.deleteById(1);
   }
 
   @Test
   public void findAllById() {
-    List<Trader> traders = Lists
-        .newArrayList(traderDao.findAllById(Arrays.asList(savedTrader.getId(), -1)));
-    assertEquals(1, traders.size());
-    assertEquals(savedTrader.getCountry(), traders.get(0).getCountry());
+    List<Account> accounts = Lists
+        .newArrayList(accountDao.findAllById(Arrays.asList(savedAccount.getId(), -1)));
+    assertEquals(1, accounts.size());
+    assertEquals(savedAccount.getAmount(), accounts.get(0).getAmount(), 0);
   }
 
   @Test
   public void findAll() {
-    List<Trader> traders = Lists
-        .newArrayList(traderDao.findAll());
-    assertEquals(1, traderDao.count());
-    assertEquals(1, traders.size());
-    assertEquals(savedTrader.getCountry(), traders.get(0).getCountry());
+    List<Account> accounts = Lists
+        .newArrayList(accountDao.findAll());
+    assertEquals(1, accountDao.count());
+    assertEquals(1, accounts.size());
+    assertEquals(savedAccount.getAmount(), accounts.get(0).getAmount(), 0);
   }
 
   @Test
   public void findById() {
-    Optional<Trader> result = traderDao.findById(1);
-    assertTrue(traderDao.existsById(1));
-    assertFalse(traderDao.existsById(42));
+    Optional<Account> result = accountDao.findById(1);
+    assertTrue(accountDao.existsById(1));
+    assertFalse(accountDao.existsById(42));
     assertTrue(result.isPresent());
     assertEquals(1, result.get().getId(), 0);
-    assertEquals("John", result.get().getFirstName());
-    assertEquals("1980-09-09 00:00:00.0", result.get().getDob().toString());
+    assertEquals(2.0, result.get().getAmount(), 0);
+    assertEquals(1, result.get().getTraderId(), 0);
   }
 
   @Test
   public void deleteById() {
-    traderDao.deleteById(0);
-    assertTrue(traderDao.existsById(1));
-    traderDao.deleteById(1);
-    assertFalse(traderDao.existsById(1));
+    accountDao.deleteById(0);
+    assertTrue(accountDao.existsById(1));
+    accountDao.deleteById(1);
+    assertFalse(accountDao.existsById(1));
   }
 
   @Test
   public void deleteAll() {
-    assertTrue(traderDao.existsById(1));
-    traderDao.deleteAll();
-    assertFalse(traderDao.existsById(1));
+    assertTrue(accountDao.existsById(1));
+    accountDao.deleteAll();
+    assertFalse(accountDao.existsById(1));
   }
 }
