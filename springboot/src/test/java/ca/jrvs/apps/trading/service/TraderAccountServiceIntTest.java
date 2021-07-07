@@ -17,11 +17,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TestConfig.class})
+@Import(TestConfig.class)
+//@SpringBootTest(classes = {TestConfig.class})
 @Sql({"classpath:schema.sql"})
 public class TraderAccountServiceIntTest {
 
