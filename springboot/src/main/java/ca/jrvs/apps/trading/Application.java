@@ -39,18 +39,9 @@ public class Application implements CommandLineRunner {
   public static void main(String args[]) throws Exception {
     SpringApplication app = new SpringApplication(Application.class);
     app.run(args);
-    exit(0);
   }
 
   @Override
   public void run(String... args) throws Exception {
-    if (args.length != 2)
-      throw new IllegalArgumentException("USAGE: Application show ticker_id");
-    if (args[0].equals("show")) {
-      System.out.println(quoteService.findIexQuoteByTicker(args[1]).getSymbol());
-    }
-    else
-      throw new IllegalArgumentException("Command " + args[1] + " not supported.");
-    return;
   }
 }
