@@ -1,3 +1,8 @@
+\c postgres;
+DROP DATABASE IF EXISTS jrvstrading;
+DROP DATABASE IF EXISTS jrvstrading_test;
+
+
 CREATE DATABASE jrvstrading;
 GRANT ALL PRIVILEGES ON DATABASE jrvstrading TO postgres;
 

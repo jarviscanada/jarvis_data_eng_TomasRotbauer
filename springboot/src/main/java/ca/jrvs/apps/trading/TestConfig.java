@@ -5,15 +5,16 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@TestConfiguration
 @ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao", "ca.jrvs.apps.trading.service"})
 public class TestConfig {
 
-  @Bean
+  @Bean("TestMarketDataConfigBean")
   public MarketDataConfig marketDataConfig() {
     MarketDataConfig marketDataConfig = new MarketDataConfig();
     marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
@@ -21,7 +22,7 @@ public class TestConfig {
     return marketDataConfig;
   }
 
-  @Bean
+  @Bean("TestDataSourceBean")
   public DataSource dataSource() {
     System.out.println("Creating apacheDataSource");
     String url = System.getenv("PSQL_URL");
@@ -34,7 +35,7 @@ public class TestConfig {
     return basicDataSource;
   }
 
-  @Bean
+  @Bean("TestHttpClientConnectionManagerBean")
   public HttpClientConnectionManager httpClientConnectionManager() {
     PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
     cm.setMaxTotal(50);
