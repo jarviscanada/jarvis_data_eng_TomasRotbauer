@@ -7,17 +7,60 @@
 * [Improvements](#Improvements)
 
 # Introduction
-- Explain business context briefly (see the kick-off ticket)
-- Explain what does your project does? (e.g. manage clients and accounts, execute security orders, etc..)
-- Discuss technologies you used
+In this project, I developed a proof of concept trading platform following the microservices architecture in order to assess the feasibility of replacing the legacy application which employs a hard-to-maintain monolithic architecture. The application has the primary functions to maintain clients and their accounts as well as execute security orders for those clients. More specifically, it can create new traders and accounts, deposit or withdraw funds, display the most up-to-date market data, and save such data to the clients local database for data persistence purposes. The application was developed in Java utilizing the Spring Boot framework for facilitating dependency management across all the microservices. Market data was retrieved from the IEX cloud platform via a REST API using Apache Tomcat as the webservlet container. The relational database management system used was PostgreSQL. Finally, Docker was used for deployment, and two separate containers were created for the database and the application respectively. The containers communicate necessary SQL queries and responses over a local bridge network. Apache Maven was used for building and packaging the app, and GIT was used for version control.
 
 # Quick Start
-- Prequiresites: Docker, CentOS 7
-- Docker scripts with description
-	- build images
-  - create a docker network
-  - start containers
-- Try trading-app with SwaggerUI (screenshot)
+Prerequisites: Docker, CentOS 7
+1. Build database Docker image
+```
+cd ./springboot/psql
+docker build -t trading-psql .  #docker builds ./Dokcerfile by default
+docker image ls -f reference=trading-psql
+```
+2. Build application Docker image
+```
+cd ./springboot/
+docker build -t trading-app . #docker builds ./Dokcerfile by default
+docker image ls -f reference=trading-app
+```
+3. Crete a Docker network
+```
+#create a new docker network
+sudo docker network create trading-net
+
+#verify
+docker network ls
+```
+4. Start Docker containers
+```
+docker run --name trading-psql-dev \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_DB=jrvstrading \
+-e POSTGRES_USER=postgres \
+--network trading-net \
+-d -p 5432:5432 trading-psql
+
+#Verify
+docker ps
+
+#set IEX credential
+IEX_PUB_TOKEN="your_token"
+
+#start trading-app container which is attached to the trading-net docker network
+docker run -d --rm --name trading-app-dev \
+-e "PSQL_URL=jdbc:postgresql://trading-psql-dev:5432/jrvstrading" \
+-e "PSQL_USER=postgres" \
+-e "PSQL_PASSWORD=password" \
+-e "IEX_PUB_TOKEN=${IEX_PUB_TOKEN}" \
+--network trading-net \
+-p 5000:5000 -t trading-app
+
+#list running containers
+#you should see two running docker containers
+docker container ls
+```
+- Try trading-app with SwaggerUI<br/>
+  ![alt text]( "SwaggerUI in Google Chrome")
 
 # Implemenation
 ## Architecture
