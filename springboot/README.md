@@ -60,7 +60,7 @@ docker run -d --rm --name trading-app-dev \
 docker container ls
 ```
 - Try trading-app with SwaggerUI<br/>
-  ![alt text]( "SwaggerUI in Google Chrome")
+  ![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/TradingApp.png "SwaggerUI in Google Chrome")
 
 # Implemenation
 ## Architecture
