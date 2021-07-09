@@ -1,6 +1,6 @@
 # Table of contents
 * [Introduction](#Introduction)
-* [Quick Start](#Quick Start)
+* [Quick Start](#Quick-Start)
 * [Implementation](#Implementation)
 * [Test](#Test)
 * [Deployment](#Deployment)
@@ -64,41 +64,42 @@ docker container ls
 
 # Implemenation
 ## Architecture
-- Draw a component diagram that contains controllers, services, DAOs, SQL, IEX Cloud, WebServlet/Tomcat, HTTP client, and SpringBoot. (you must create your own diagram)
-- briefly explain the following components and services (3-5 sentences for each)
-  - Controller layer (e.g. handles user requests....)
-  - Service layer
-  - DAO layer
-  - SpringBoot: webservlet/TomCat and IoC
-  - PSQL and IEX
+![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/architecture.png "App Architecture")
+### Controller Layer
+The controller layer is one layer below the GUI. When a user issues a request via a supported API such as a web browser, the corresponding controller layer method is invoked. The controller layer in turn forwards the request to the corresponding service layer method(s), and returns the information retrieved to the top layer.
+### Service Layer 
+The service layer is one layer below the controller layer. It contains all the business logic of the application. For example, when deleting a user from the Trader database table, the service layer ensures that they have a balance of zero in their associated account before proceeding. Upon validation, the service layer transfers the request to the data access layer.
+### Data Access Layer
+The data access objects (DAOs) reside within the data access layer, right below the service layer. The data access layer acts as the interface between the PostgreSQL database, and the IEX Cloud. In general, the DAOs are responsible for performing simple CRUD operations on the database object in question.
+### Spring Boot & Apache Tomcat
+The application relies on Spring Boot mainly for dependency management across all the layers. The Spring [Boot] framework provides dependency injection through its featured IoC (Inversion of Control) container. The container performs dependency injection upon Bean creation. Spring Boot also provides an embedded webservlet container - Apache Tomcat. Tomcat sits between the HTTP requests and responses, and holds all the necessary logic (including the three layers) to process the requests and responses.
+### PostgreSQL & IEX Cloud
+The PSQL database featured in this application is used to persist user specific data. For example, it contains user account information and all the user's security orders. The IEX Cloud platform is a REST API that provides market data (e.g. stock quotes). The application acquires its market data from here.
 
 ## REST API Usage
 ### Swagger
-What's swagger (1-2 sentences, you can copy from swagger docs). Why are we using it or who will benefit from it?
+Swagger is a set of open-source tools built around the OpenAPI Specification that can help you design, build, document, and consume REST APIs. In this application, Swagger UI is an HTTP client at the top layer, providing a web browser-accessible GUI for the application. It lies between the controller layer and the actual user (see screenshot in [Quick Start](#Quick-Start)).
 ### Quote Controller
-- High-level description for this controller. Where is market data coming from (IEX) and how did you cache the quote data (PSQL). Briefly talk about data from within your app
-- briefly explain each endpoint
-  e.g.
-  - GET `/quote/dailyList`: list all securities that are available to trading in this trading system blah..blah..
-### Trader Controller
-- High-level description for trader controller (e.g. it can manage trader and account information. it can deposit and withdraw fund from a given account)
-- briefly explain each endpoint
-### Order Controller
-- High-level description for this controller.
-- briefly explain each endpoint
-### App controller
-- briefly explain each endpoint
-### Optional(Dashboard controller)
-- High-level description for this controller.
-- briefly explain each endpoint
+The Quote Controller is a controller-layer component that provides the user with functions for retrieving IEX market data (quotes) as well as caching them to the local PSQL database Quote table. The Quote table stores the ticker, last price, bid price, ask price, bid size, and the ask size. 
+#### Endpoints:
+- GET `/quote/dailyList`: list all securities that are available for trading in this trading system.
+- GET `/quote/iex/ticker/{ticker}`: Retrieve a quote by ticker ID from the IEX Cloud.
+- POST `/quote/tickerId/{tickerId}`: Fetch a quote by ticker ID from the IEX Cloud and store it in the local trading system.
+- PUT `/quote/`: Manually update a Quote in the Quote table.
+- PUT `/quote/iexMarketData`: Update all Quote table quotes using IEX market data.
+### Trader/Account Controller
+The TraderAccount controller is a controller-layer component that provides the user with functions for managing account and trader information stored in the local PSQL database. The Trader database table stores a client' first/last names, date of birth, country, and email. The Account table stores the trader ID and balance (amount). The amount in the Account table is managed via the controllers withdraw and deposit functions.
+#### Endpoints:
+- DELETE `/trader/traderId/{traderId}`: Delete a trader from the Trader table.
+- POST `/trader/`: Create a new trader and account using a data transfer object (DTO) JSON.
+- POST `/trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/{country}/email/{email}`: Create a new trader and account.
+- PUT `trader/deposit/traderId/{traderId}/amount/{amount}`: Make a deposit into the trader's account.
+- PUT `trader/withdraw/traderId/{traderId}/amount/{amount}`: Make a withdrawal from the trader's account.
 
 # Test 
-How did you test your application? Did you use any testing libraries? What's the code coverage?
-
+In order to ensure logical and functional correctness of the application, integration tests were written for all components of both the service and data access layers. The testing library used was JUnit 4, and a minimum code coverage of 60% was maintained.
 # Deployment
-- docker diagram including images, containers, network, and docker hub
-e.g. https://www.notion.so/jarviscanada/Dockerize-Trading-App-fc8c8f4167ad46089099fd0d31e3855d#6f8912f9438e4e61b91fe57f8ef896e0
-- describe each image in details (e.g. how psql initialize tables)
+![alt text]()
 
 # Improvements
 If you have more time, what would you improve?
