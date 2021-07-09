@@ -60,11 +60,11 @@ docker run -d --rm --name trading-app-dev \
 docker container ls
 ```
 - Try trading-app with SwaggerUI<br/>
-  ![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/TradingApp.png "SwaggerUI in Google Chrome")
+  ![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/develop/springboot/assets/TradingApp.png "SwaggerUI in Google Chrome")
 
 # Implemenation
 ## Architecture
-![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/architecture.png "App Architecture")
+![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/develop/springboot/assets/architecture.png "App Architecture")
 ### Controller Layer
 The controller layer is one layer below the GUI. When a user issues a request via a supported API such as a web browser, the corresponding controller layer method is invoked. The controller layer in turn forwards the request to the corresponding service layer method(s), and returns the information retrieved to the top layer.
 ### Service Layer 
@@ -99,7 +99,7 @@ The TraderAccount controller is a controller-layer component that provides the u
 # Test 
 In order to ensure logical and functional correctness of the application, integration tests were written for all components of both the service and data access layers. The testing library used was JUnit 4, and a minimum code coverage of 60% was maintained.
 # Deployment
-![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/DockerDiagram.png "Docker Diagram")
+![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/develop/springboot/assets/DockerDiagram.png "Docker Diagram")
 * The trading-psql image is based off base image postgres:9.6-alpine. The image contains a special directory called "docker-entrypoint-initdb.d" which is used for storing SQL scripts that are to be executed upon image instantiation. All the necessary .sql scripts were placed into this directory which initialize the database upon container creation.
 * The trading-app image holds the application itself. The Dockerfile which assembles the trading-app image contains all the necessary commands to build the application. First, a command imports a Maven image in order to build the application. Next, a command copies over the source code and pom.xml file into the environment, and finally a RUN command issues a regular "mvn clean package" command in order to build the application inside the image.
 
