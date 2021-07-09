@@ -68,6 +68,11 @@
       ],
       "git_url": "/core_java",
       "name": "Core Java Apps"
+    },
+    {
+      "description": "Implemented a proof of concept stock market trading platform allowing users to manage their market securities. The application follows the microservices architecture for maintainability and was developed in Java using Spring Boot for facilitating dependency management across all the MVC layers. Current market data is retrieved from a cloud service via REST API using Apache Tomcat as the application web servlet container. Data is safely persisted from the main application container into a separate PostgreSQL database container over a bridge network. The app was built using Apache Maven, containerized with Docker, and developed with GIT.",
+      "git_url": "/springboot",
+      "name": "Springboot App"
     }
   ],
   "name": "Tomas Rotbauer",
@@ -109,6 +114,7 @@
     "competent": [
       "Docker",
       "Maven",
+      "Spring Boot",
       "Concurrent programming",
       "Neural networks",
       "Processor architecture",
