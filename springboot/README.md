@@ -99,8 +99,11 @@ The TraderAccount controller is a controller-layer component that provides the u
 # Test 
 In order to ensure logical and functional correctness of the application, integration tests were written for all components of both the service and data access layers. The testing library used was JUnit 4, and a minimum code coverage of 60% was maintained.
 # Deployment
-![alt text]()
+![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/SBReadme/springboot/assets/DockerDiagram.png "Docker Diagram")
+* The trading-psql image is based off base image postgres:9.6-alpine. The image contains a special directory called "docker-entrypoint-initdb.d" which is used for storing SQL scripts that are to be executed upon image instantiation. All the necessary .sql scripts were placed into this directory which initialize the database upon container creation.
+* The trading-app image holds the application itself. The Dockerfile which assembles the trading-app image contains all the necessary commands to build the application. First, a command imports a Maven image in order to build the application. Next, a command copies over the source code and pom.xml file into the environment, and finally a RUN command issues a regular "mvn clean package" command in order to build the application inside the image.
 
 # Improvements
-If you have more time, what would you improve?
-- at least 3 improvements
+1. Implement an Order controller so that the user is able to place security orders (This was an optional feature to implement).
+2. Add the ability for a trader to own more than one account. Currently, the relationship between the Account and Trader tables is exclusively one-to-one.
+3. Implement automatic quote table syncing with the IEX Cloud so that the user need not manually invoke the PUT `/quote/iexMarketData` endpoint everytime.
