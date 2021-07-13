@@ -7,4 +7,10 @@ intellij-java-google-style.xml
 *.iml
 **/grep/data
 **/dependency-reduced-pom.xml
-*.sql.swp
+**/.sql.swp
+**/.config/configstore/update-notifier-npm.json
+**/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+**/.ipython/
+**/.jupyter/lab/workspaces/lab-a511.jupyterlab-workspace
+**/.local/
+**/.npm/
