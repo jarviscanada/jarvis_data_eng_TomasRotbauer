@@ -34,6 +34,7 @@ public class MiddleOfLinkedList {
        }
        current = current.next;
      }
+     
      return middle;
   }
 }
