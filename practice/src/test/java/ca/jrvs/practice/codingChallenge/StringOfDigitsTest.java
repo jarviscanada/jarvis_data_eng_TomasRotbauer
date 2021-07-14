@@ -22,4 +22,12 @@ public class StringOfDigitsTest {
     assertFalse(solver.checkStringJavaInteger("0.8"));
     assertFalse(solver.checkStringJavaInteger("123,123,678"));
   }
+
+  @Test
+  public void checkStringRegex() {
+    assertTrue(solver.checkStringRegex("1234567890"));
+    assertTrue(solver.checkStringRegex("1"));
+    assertFalse(solver.checkStringRegex("0.8"));
+    assertFalse(solver.checkStringRegex("123,123,678"));
+  }
 }

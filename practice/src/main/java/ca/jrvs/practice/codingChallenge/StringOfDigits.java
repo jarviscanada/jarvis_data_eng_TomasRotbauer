@@ -29,4 +29,12 @@ public class StringOfDigits {
     }
     return isInteger;
   }
+
+  /**
+   * Complexity: O(n)
+   * Justification: Need to verify all n characters. There is no other way.
+   */
+  public boolean checkStringRegex(String s) {
+    return s.matches("[0-9]+");
+  }
 }
