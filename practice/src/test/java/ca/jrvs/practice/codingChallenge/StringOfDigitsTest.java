@@ -14,4 +14,12 @@ public class StringOfDigitsTest {
     assertFalse(solver.checkStringASCII("0.8"));
     assertFalse(solver.checkStringASCII("123,123,678"));
   }
+
+  @Test
+  public void checkStringJavaInteger() {
+    assertTrue(solver.checkStringJavaInteger("1234567890"));
+    assertTrue(solver.checkStringJavaInteger("1"));
+    assertFalse(solver.checkStringJavaInteger("0.8"));
+    assertFalse(solver.checkStringJavaInteger("123,123,678"));
+  }
 }

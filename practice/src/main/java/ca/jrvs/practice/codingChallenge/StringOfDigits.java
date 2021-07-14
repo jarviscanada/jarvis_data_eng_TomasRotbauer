@@ -15,4 +15,18 @@ public class StringOfDigits {
         return false;
     return true;
   }
+
+  /**
+   * Complexity: O(n)
+   * Justification: Need to verify all n characters. There is no other way.
+   */
+  public boolean checkStringJavaInteger(String s) {
+    boolean isInteger = true;
+    try {
+      Integer.parseInt(s);
+    } catch (NumberFormatException e) {
+      isInteger = false;
+    }
+    return isInteger;
+  }
 }
