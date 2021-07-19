@@ -6,7 +6,7 @@ I am a recent bachelor of applied science (BASc) graduate from the University of
 
 **Proficient:** Java, C/C++, Python, Linux/Bash, RDBMS/SQL, HTTP/REST API, Agile/Scrum, Git, Algorithms and data structures, Verilog HDL, Linear algebra/calculus
 
-**Competent:** Docker, Maven, Concurrent programming, Neural networks, Processor architecture, Assembly Language
+**Competent:** Docker, Maven, Spring Boot, Concurrent programming, Neural networks, Processor architecture, Assembly Language
 
 **Familiar:** JavaScript, HTML/CSS, TensorFlow, LLVM, GNU Bison, Networking (OSI model), MATLAB
 
@@ -22,6 +22,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
   - Twitter App: Developed a Java command line CRUD application capable of posting, viewing, and deleting tweets from a user's Twitter account. Utilized Twitter REST API and leveraged HTTP for client-server communication. The application follows the MVC architecture and comprises multiple layers to facilitate development and testing. Spring Boot was used for dependency management, Docker for deployment, and Maven for building and packaging the application.
   - JDBC App: Implemented a simple data access object (DAO) application using Java Database Connectivity (JDBC) API for accessing and running queries on a small relational database with a couple of tables. The application can perform all the fundamental CRUD (create, read, update & delete) operations on the local PostgreSQL instance via transactions.
   - Grep App: Programmed with Java 8 and leveraged its latest features including the stream API and lambda functions to develop an application similar to the Linux built-in grep feature. The program searches recursively through a root directory to map out all files and finds the lines that match the user-specified Java regular expression. Compilation was handled with the Maven tool, and the final product was packaged into a Docker container using Dockerfiles.
+
+**Springboot App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_TomasRotbauer/tree/master/springboot)]: Implemented a proof of concept stock market trading platform allowing users to manage their market securities. The application follows the microservices architecture for maintainability and was developed in Java using Spring Boot for facilitating dependency management across all the MVC layers. Current market data is retrieved from a cloud service via REST API using Apache Tomcat as the application web servlet container. Data is safely persisted from the main application container into a separate PostgreSQL database container over a bridge network. The app was built using Apache Maven, containerized with Docker, and developed with GIT.
 
 
 ## Highlighted Projects
