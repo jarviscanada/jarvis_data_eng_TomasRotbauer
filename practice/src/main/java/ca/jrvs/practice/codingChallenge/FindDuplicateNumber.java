@@ -41,4 +41,22 @@ public class FindDuplicateNumber {
 
     return -1;
   }
+
+  public int properSolution(int[] nums) {
+    int slow = nums[0];
+    int fast = nums[nums[nums[0]]];
+
+    do {
+      slow = nums[slow];
+      fast = nums[nums[fast]];
+    }
+    while (slow != fast);
+
+    slow = nums[0];
+    while (slow != fast) {
+      slow = nums[slow];
+      fast = nums[fast];
+    }
+    return fast;
+  }
 }
