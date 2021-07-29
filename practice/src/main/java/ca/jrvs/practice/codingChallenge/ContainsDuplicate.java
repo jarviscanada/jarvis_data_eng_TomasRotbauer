@@ -16,11 +16,9 @@ public class ContainsDuplicate {
   public boolean sorting(int[] nums) {
     Arrays.sort(nums);
 
-    int previous = nums[0];
-    for (int i = 1; i < nums.length; i++) {
-      if (previous == nums[i])
+    for (int previous = 0, i = 1; i < nums.length; i++, previous++) {
+      if (nums[previous] == nums[i])
         return true;
-      previous = nums[i];
     }
 
     return false;
