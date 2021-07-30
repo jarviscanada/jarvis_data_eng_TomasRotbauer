@@ -15,3 +15,4 @@ intellij-java-google-style.xml
 **/.local/
 **/.npm/
 **/.cache/
+**/online_retail_II.csv
