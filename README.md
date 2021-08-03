@@ -25,6 +25,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 
 **Springboot App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_TomasRotbauer/tree/master/springboot)]: Implemented a proof of concept stock market trading platform allowing users to manage their market securities. The application follows the microservices architecture for maintainability and was developed in Java using Spring Boot for facilitating dependency management across all the MVC layers. Current market data is retrieved from a cloud service via REST API using Apache Tomcat as the application web servlet container. Data is safely persisted from the main application container into a separate PostgreSQL database container over a bridge network. The app was built using Apache Maven, containerized with Docker, and developed with GIT.
 
+**Python Data Analytics** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_TomasRotbauer/tree/master/python_data_anlytics)]: Analyzed structured retailer data using data wrangling and OLAP methodologies to provide statistical insight for a prospective marketing team. Segmented customers into RFM categories with the help of Python Pandas and SQL querying. The analysis was performed in a Python Jupyter notebook and includes common visualizations to illustrate trends.
+
 
 ## Highlighted Projects
 **Database Design Toolkit** [[GitHub](https://github.com/tomasrotbauer/Database-Design-Toolkit)]: Developed a Python script for automating database design decisions. Capable of functional dependency-set closure, minimization, BCNF decomposition, and more.
