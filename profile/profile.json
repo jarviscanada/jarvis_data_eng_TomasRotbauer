@@ -76,7 +76,7 @@
     },
     {
       "description": "Analyzed structured retailer data using data wrangling and OLAP methodologies to provide statistical insight for a prospective marketing team. Segmented customers into RFM categories with the help of Python Pandas and SQL querying. The analysis was performed in a Python Jupyter notebook and includes common visualizations to illustrate trends.",
-      "git_url": "/python_data_anlytics",
+      "git_url": "/python_data_analytics",
       "name": "Python Data Analytics"
     }
   ],
