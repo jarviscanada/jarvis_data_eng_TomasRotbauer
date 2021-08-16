@@ -45,7 +45,7 @@ as the monitoring agents. The purpose of this schematic is to demonstrate
 the feasibility of implementing the MVP on a cluster, since this project
 focused on a per-unit implementation.
 
-![alt text](https://raw.githubusercontent.com/jarviscanada/jarvis_data_eng_TomasRotbauer/feature/readme/linux_sql/assets/architecture.png "Architecture Schematic")
+![alt text](assets/architecture.png "Architecture Schematic")
 
 ## Scripts
 ### Creating, starting & stopping a PSQL Docker container
