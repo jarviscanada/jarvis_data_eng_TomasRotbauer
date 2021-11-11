@@ -22,9 +22,14 @@
       "name": "Database Design Toolkit"
     },
     {
+      "description": "Developed an against-the-computer chess game with intuitive GUI in Java using the Java Swing API. Followed MVC architecture for better code organization. Employed multithreading for increased performance when traversing the game tree. Utilized Negamax algorithm with alpha-beta pruning that reaches a ply depth of 7 in a timely manner.",
+      "git_url": "https://github.com/tomasrotbauer/Chess",
+      "name": "Chess Game"
+    },
+    {
       "description": "Developed fully functional, against-the-computer checkers game with intuitive GUI in C++ using SFML graphics library. Implemented Minimax algorithm with alpha-beta pruning capable of looking 12+ moves ahead in a timely manner which makes the AI virtually unbeatable by human players.",
       "git_url": "https://github.com/tomasrotbauer/checkers",
-      "name": "Checkers Game with AI"
+      "name": "Checkers Game"
     },
     {
       "description": "Developed a Sudoku-solver program in Python featuring a user-friendly GUI implemented with Tkinter. Capable of solving all Sudoku puzzles, regardless of the difficulty level.",

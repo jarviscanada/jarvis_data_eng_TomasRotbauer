@@ -31,7 +31,9 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_TomasRotba
 ## Highlighted Projects
 **Database Design Toolkit** [[GitHub](https://github.com/tomasrotbauer/Database-Design-Toolkit)]: Developed a Python script for automating database design decisions. Capable of functional dependency-set closure, minimization, BCNF decomposition, and more.
 
-**Checkers Game with AI** [[GitHub](https://github.com/tomasrotbauer/checkers)]: Developed fully functional, against-the-computer checkers game with intuitive GUI in C++ using SFML graphics library. Implemented Minimax algorithm with alpha-beta pruning capable of looking 12+ moves ahead in a timely manner which makes the AI virtually unbeatable by human players.
+**Chess Game** [[GitHub](https://github.com/tomasrotbauer/Chess)]: Developed an against-the-computer chess game with intuitive GUI in Java using the Java Swing API. Followed MVC architecture for better code organization. Employed multithreading for increased performance when traversing the game tree. Utilized Negamax algorithm with alpha-beta pruning that reaches a ply depth of 7 in a timely manner.
+
+**Checkers Game** [[GitHub](https://github.com/tomasrotbauer/checkers)]: Developed fully functional, against-the-computer checkers game with intuitive GUI in C++ using SFML graphics library. Implemented Minimax algorithm with alpha-beta pruning capable of looking 12+ moves ahead in a timely manner which makes the AI virtually unbeatable by human players.
 
 **Python Sudoku Solver** [[GitHub](https://github.com/tomasrotbauer/sudoku-solver)]: Developed a Sudoku-solver program in Python featuring a user-friendly GUI implemented with Tkinter. Capable of solving all Sudoku puzzles, regardless of the difficulty level.
 
