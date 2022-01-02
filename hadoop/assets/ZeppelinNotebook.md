@@ -1,41 +1,3 @@
-### Table of contents
-* [Introduction](#Introduction)
-* [Hadoop Cluster](#Hadoop_Cluster)
-* [Hive Project](#Hive_Project)
-* [Improvements](#Improvements)
-
-# Introduction
-In this project, I deployed a Hadoop cluster using the Google Cloud Computing 
-platform to analyze the 2016 World Development Indicators big data file hosted 
-on Google BigQuery. Leveraged Apache Hive for querying the data on HDFS, and 
-organized the analysis in a Zeppelin notebook.
-
-# Hadoop Cluster
-The cluster runs with the GCP Dataproc service and is comprised of 1 master and
-2 worker machines. Hardware includes 2 vCPUs, 12 GBs of RAM and a 100 GB hard 
-drives.
-![alt text](./assets/Architecture.png "Cluster Architecture Diagram")
-Component Details:
-1. HDFS: HDFS is the Hadoop Distributed File System. It is a filesystem used in Hadoop for storing and managing big data. HDFS is designed for storing very large files with streaming data access patterns, running on clusters of commodity hardware. Streaming data access implies write once, read many times.HDFS is the Hadoop Distributed Filesystem.
-2. YARN: YARN stands for Yet Another Resource Negotiator. It is the architecture used by Hadoop v2.0 which replaces and improves upon the legacy MapReduce architecture as used by v1.0. Basically, YARN eliminates the bottleneck of the overloaded JobTracker by splitting its tasks and reassigning them more evenly among compute resources.
-3. Zeppelin: Apache Zeppelin is a web based notebook for data analytics. It features an interpreter form many popular languages including HiveQL, as used in the project.
-4. Hive: Hive is a framework for data warehousing that runs on top of Hadoop. Hive provides a querying language similar to SQL known as HiveQL that can be run against big data on an HDFS. These are the main components of Hive:
-    * The client usually runs a JDBC application known as Beeline (utilizing Hive JDBC drivers). The client application talks to the Hive server, which is another instance of a JVM running in a separate process.
-    * The Hive server uses another driver for communicating with the metastore as well as the execution engine.
-    * Metastore is the central repository for Hive metadata. Metastore is comprised of two comonents: a service and the backing store for data. Metadata is a database of namely table schema information.
-    * Examples of execution engines include classical MapReduce, Spark, and Tez. The execution engine communicates with the Hadoop cluster itself.
-
-# Hive Project
-The core of the project was the data analysis with Hive. Queries were formulated in HiveQL,
-and some queries took fairly long to execute without any optimizations. However,
-when data was partitioned and/or converted into parquet files - a columnar file
-format - querying time was dramatically reduced. This is because partitioning allows
-Hive to concentrate only on relevant data partitions instead of the entire dataset,
-and columnar file formats are better for queries that rely on multiple columns.
-
-The notebook can be found below:
-
-
 ```hive
 --Load data from google storage into an external hive table
 
@@ -884,12 +846,3 @@ INFO  : Subscribed to counters: [] for queryId: hive_20211223013331_e02b188b-a35
 INFO  : Tez session hasn't been created yet. Opening session
 INFO  : Dag name: SELECT country_name, year, indicator_...year (Stage-1)
 INFO  : Status: Running (Executing on YARN cluster with App id application_1640191836849_0053)
-
-
-# Improvements
-1. Migrate from using Apache Hive to the newer and faster Apache Spark for data
-analysis.
-2. Increase the cluster size such that more data is globally held in worker
-RAMs instead of on the disk.
-3. Switch from Zeppelin to Azure Databtricks and leverage the relevant features
-such as DBFS and Blob storage.
