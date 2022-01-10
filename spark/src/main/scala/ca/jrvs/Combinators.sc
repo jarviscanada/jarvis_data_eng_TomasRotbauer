@@ -99,7 +99,7 @@ source.close
  * Convert lines to a list of employees
  * e.g. employees: List[Employee] = List(Employee(1,amy,toronto), Employee(2,bob,calgary), Employee(3,chris,toronto), Employee(4,dann,montreal))
  */
-case class Employee(val id: Int, val name: String, val city: String, val age: Int)
+case class Employee(var id: Int, var name: String, var city: String, var age: Int)
 
 val mapToEmp = (line:Array[String]) => {
   Employee(line(0).toInt, line(1), line(2), line(3).toInt )
@@ -117,7 +117,7 @@ val employees = noHeader.map(mapToEmp)
  * result:
  * upperCity: List[Employee] = List(Employee(1,amy,TORONTO,20), Employee(2,bob,CALGARY,19), Employee(3,chris,TORONTO,20), Employee(4,dann,MONTREAL,21), Employee(5,eric,TORONTO,22))
  */
-
+val upperCity = employees.map(e => Employee(e.id, e.name, e.city.toUpperCase(), e.age))
 
 /**
  * SQL questions4:
@@ -130,8 +130,7 @@ val employees = noHeader.map(mapToEmp)
  * result:
  * res5: List[Employee] = List(Employee(1,amy,TORONTO,20), Employee(3,chris,TORONTO,20), Employee(5,eric,TORONTO,22))
  */
-//write you solution here
-
+val toronto = upperCity.filter(e => e.city == "TORONTO")
 
 /**
  * SQL questions5:
@@ -145,8 +144,7 @@ val employees = noHeader.map(mapToEmp)
  * result:
  * cityNum: scala.collection.immutable.Map[String,Int] = Map(CALGARY -> 1, TORONTO -> 3, MONTREAL -> 1)
  */
-//write you solution here
-
+val cityNum = upperCity.groupBy(e => e.city).mapValues(_.size)
 
 /**
  * SQL questions6:
@@ -160,4 +158,4 @@ val employees = noHeader.map(mapToEmp)
  * result:
  * res6: scala.collection.immutable.Map[(String, Int),Int] = Map((MONTREAL,21) -> 1, (CALGARY,19) -> 1, (TORONTO,20) -> 2, (TORONTO,22) -> 1)
  */
-//write you solution here
+val cityNum = upperCity.groupBy(e => (e.city, e.age)).mapValues(_.size)
